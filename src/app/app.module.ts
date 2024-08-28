@@ -37,3 +37,4 @@ import { RecepcionComponent } from './vistas/mae/bandeja/recepcion/recepcion.com
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+//EJEMPLO
