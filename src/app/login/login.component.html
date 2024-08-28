@@ -1,27 +1,29 @@
 
     <div class="container mt-5">
-        <!-- Nav tabss -->
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-            </li>
-        </ul>
-        <!-- Tab panes -->
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-             <button (click)="login()">Login</button>
+        <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-md-6">
+                <div class="card mt-5">
+                  <div class="card-header text-center">
+                    <h4>Login</h4>
+                  </div>
+                  <div class="card-body">
+                    <form (ngSubmit)="login()">
+                      <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" [(ngModel)]="email" name="email" class="form-control" required>
+                      </div>
+                      <div class="form-group mt-3">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required>
+                      </div>
+                      <button type="submit" class="btn btn-primary mt-4 w-100">Login</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <p>gfsdgfdg</p>
-            </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                <p>gfdgfdg</p>
-            </div>
-        </div>
+          </div>
+          <!-- Nav tabss -->
+       
     </div>

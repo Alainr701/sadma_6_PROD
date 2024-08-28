@@ -1,0 +1,33 @@
+
+
+<div class="container mt-5">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">ENTRADA DE CORRESPONDENCIA</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">RECEPCION DE CORRESPONDENCIA</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">CORRESPONDENCIA CONCLUIDA</button>
+        </li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+                <app-entrada-c></app-entrada-c>                       
+              </div>
+                
+            
+            
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-lacopnbelledby="profile-tab">
+            <app-recepcion></app-recepcion>
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            <app-concluidos></app-concluidos>
+        </div>
+    </div>
+</div>

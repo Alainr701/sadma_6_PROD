@@ -1,0 +1,9 @@
+.details {
+    visibility: collapse;
+  }
+  .details.show {
+    visibility: visible;
+  }
+  th, td {
+    width: 150px;
+  }

@@ -1,0 +1,81 @@
+<div class="container mt-4">
+  <div class="table-responsive">
+    <table class="table table-hover text-center align-middle">
+      <thead class="table-info">
+        <tr>
+          <th>ACCIONES</th>
+          <th>CODIGO</th>
+          <th>REMITENTE</th>
+          <th>PLAZO (horas)</th>
+          <th>FECHA LÍMITE</th>
+          <th>PROVEÍDO</th>
+          <th>HISTORIAL</th>
+          <th>MAS DETALLES</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let correspondence of correspondences">
+          <tr>
+            <td class="d-block d-md-table-cell">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary">
+                  <i class="bi bi-check2-circle"></i> Aceptar
+                </button>
+                <button type="button" class="btn btn-secondary">
+                  <i class="bi bi-x-circle"></i> Rechazar
+                </button>
+              </div>
+            </td>
+            <td class="d-block d-md-table-cell text-wrap text-break">
+              {{ correspondence.codigo }}
+            </td>
+            <td class="d-block d-md-table-cell">
+              <button class="btn btn-outline-secondary">
+                <i class="bi bi-person-circle">{{ correspondence.remitente }}</i>
+              </button>
+            </td>
+            <td class="d-block d-md-table-cell text-wrap text-break">
+              {{ correspondence.plazo }}
+            </td>
+            <td class="d-block d-md-table-cell text-wrap text-break">
+              <span class="badge bg-warning">{{ correspondence.fechaLimite }}</span>
+            </td>
+            <td class="d-block d-md-table-cell text-wrap text-break">
+              {{ correspondence.proveido }}
+            </td>
+            <td class="d-block d-md-table-cell">
+              <button class="btn btn-outline-primary">
+                <i class="bi bi-file-earmark-text">Ver Historial</i>
+              </button>
+            </td>
+            <td class="d-block d-md-table-cell">
+              <button class="btn btn-outline-primary" (click)="toggleDetails(correspondence)">
+                <i class="bi bi-file-earmark-text">Mas Detalles</i>
+              </button>
+            </td>
+          </tr>
+          <ng-container *ngIf="correspondence.showDetails">
+            <tr class="text-start">
+              <th scope="row">Codigo</th>
+              <td colspan="7">{{ correspondence.detalles.codigo }}</td>
+            </tr>
+            <tr class="text-start">
+              <th scope="row">Accion</th>
+              <td colspan="7">{{ correspondence.detalles.accion }}</td>
+            </tr>
+            <tr class="text-start">
+              <th scope="row">Fecha de derivacion</th>
+              <td colspan="7">{{ correspondence.detalles.fechaDerivacion }}</td>
+            </tr>
+            <tr class="text-start">
+              <th scope="row">Observacion</th>
+              <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
+                {{ correspondence.detalles.observacion }}
+              </td>
+            </tr>
+          </ng-container>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>

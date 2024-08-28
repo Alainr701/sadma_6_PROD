@@ -1,0 +1,105 @@
+<style>
+    .btn-custom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 65px;
+        width: 75px;
+        color: white;
+    }
+    .btn-custom-accept {
+        background-color: #5a7184;
+    }
+    .btn-custom-reject {
+        background-color: #868e96;
+    }
+    .icon-background {
+        background-color: white;
+        border-radius: 8px;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        color: black;
+    }
+    .btn-remitente {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 65px; /* Altura personalizada para los botones */
+            width: 90px; /* Ancho personalizado para los botones */
+            color: white;
+            background-color: #5a7184; /* Color de fondo de los botones */
+            border: 2px solid #5a7184; /* Borde del botón */
+            border-radius: 8px; /* Bordes redondeados */
+            margin: 5px; /* Espaciado entre los botones */
+        }
+        .icon-remitente {
+            background-color: #ffffff; /* Color de fondo para el ícono */
+            border-radius: 50%; /* Para hacer el fondo redondo */
+            padding: 5px; /* Espaciado alrededor del ícono */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px; /* Ancho del contenedor del ícono */
+            height: 30px; /* Altura del contenedor del ícono */
+            color: #5a7184; /* Color del ícono */
+            margin-bottom: 5px; /* Espacio entre el ícono y el texto */
+        }
+   /*----------------------------------------------------*/
+    .btn-his {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 65px; /* Altura personalizada para los botones */
+            width: 90px; /* Ancho personalizado para los botones */
+            color: white;
+            background-color: #5a7184; /* Color de fondo de los botones */
+            border: 2px solid #5a7184; /* Borde del botón */
+            border-radius: 8px; /* Bordes redondeados */
+            margin: 2px; /* Espaciado entre los botones */
+            padding: 5px; /* Padding para contenido interno */
+        }
+        .icon-text-container {
+            display: flex;
+            align-items: center;
+        }
+        .icon-his {
+            color: #e9edf0; /* Color del ícono */
+            font-size: 24px; /* Tamaño del ícono */
+            margin-right: 5px; /* Espacio entre el ícono y el texto */
+        }
+        .text-his{
+            text-align: center;
+            margin-top: 2px; /* Espacio entre "Ver" y "Historial" */
+        }
+        .btn-mas {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            height: 50px; /* Altura personalizada para los botones */
+            width: 150px; /* Ancho personalizado para los botones */
+            color: white;
+            background-color: #5a7184; /* Color de fondo de los botones */
+            border: 2px solid #5a7184; /* Borde del botón */
+            border-radius: 8px; /* Bordes redondeados */
+            margin: 2px; /* Espaciado entre los botones */
+            padding: 5px; /* Padding para contenido interno */
+        }
+        .icon-text-mas {
+            display: flex;
+            align-items: center;
+        }
+        .icon-mas {
+            color: #e9edf0; /* Color del ícono */
+            font-size: 24px; /* Tamaño del ícono */
+            margin-right: 5px; /* Espacio entre el ícono y el texto */
+        }
+       
