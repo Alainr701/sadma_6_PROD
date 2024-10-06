@@ -24,11 +24,12 @@ export class LoginComponent {
     this.loginService.login(this.email, this.password).subscribe(
       (response) => {
         console.log('Login exitoso:', response);
+        this.router.navigate(['mae']);
       },
       (error) => {
         console.error('Error en el login:', error);
       }
     )
-    this.router.navigate(['mae/inicio']); 
+   
   }
 }

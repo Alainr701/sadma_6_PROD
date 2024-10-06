@@ -1,0 +1,61 @@
+.details {
+    visibility: collapse;
+  }
+  .details.show {
+    visibility: visible;
+  }
+  th, td {
+    width: 150px;
+    
+  }
+
+  /* Fijar el ancho de las columnas */
+
+.modal-header,
+.modal-footer {
+  background-color: #f1ecec;
+  color: #0cc9cf;
+  border-radius: 10px 10px 0 0; /* Esquinas redondeadas superiores */
+}
+.modal-title {
+  color: #28a745;
+}
+.modal-body {
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+  font-size: 10px;
+}
+.modal-content {
+  border-radius: 10px; /* Esquinas redondeadas del modal */
+}
+.table-dark {
+  background-color: #343a40;
+  color: #fff;
+}
+.table-dark th,
+.table-dark td {
+  vertical-align: middle;
+  border-color: #454d55;
+}
+.table-hover tbody tr:hover {
+  background-color: #495057;
+}
+.table-dark .col-nro {
+  width: 25px;
+  text-align: center;
+}
+
+/* Estilos para la alerta personalizada de SweetAlert2 */
+
+
+.custom-swal-title {
+  color: #28a745; /* Color del título */
+}
+
+.custom-swal-body {
+  font-family: "Raleway", sans-serif;
+  font-size: 10px; /* Ajusta el tamaño de la fuente según sea necesario */
+  text-align: center;
+}
+
+

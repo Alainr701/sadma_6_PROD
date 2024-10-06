@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import Swal from 'sweetalert2';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -41,16 +41,14 @@ interface Correspondence {
     remitente?: Remitente[];
   };
   showDetails?: boolean;
-  isCollapsed?: boolean;
 }
-
-
 @Component({
-  selector: 'app-recepcion',
-  templateUrl: './recepcion.component.html',
-  styleUrls: ['./recepcion.component.css']
+  selector: 'app-destiempo',
+  templateUrl: './destiempo.component.html',
+  styleUrls: ['./destiempo.component.css']
 })
-export class RecepcionComponent {
+export class DestiempoComponent {
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -133,12 +131,10 @@ export class RecepcionComponent {
           
           
       },
-      showDetails: false,
-      isCollapsed: true // Añadimos esta propiedad para el colapso de acciones
+      showDetails: false
     },
-    
     {
-      id: 1,
+      id: 2,
       codigo: 'SADM6-0096-2024',
       plazo: '(2)\n48 horas',
       fechaLimite: '19-08-2024 09:13:30',
@@ -201,23 +197,20 @@ export class RecepcionComponent {
             proveido: 'Proveído 1',
             observacion: 'Observación 1',
             remision: 'Remisión 1'
-          },
-          ],
-          remitente :[
-           {id: 1 ,
-            r:'Aldo yañez',
-            dependencia:'unidad de infrestructura publica',
-            cargo: 'jefe de unnidad',
-            numero: '78975151',
-          }
-          ]
-          
-          
+          },  
+        ],
+        remitente :[
+          {id: 1 ,
+           r:'Josmel  Trujillo',
+           dependencia:'unidad de administracion urbana',
+           cargo: 'arquitecto',
+           numero: '71115247',
+         }
+         ],
+        
       },
-      showDetails: false,
-      isCollapsed: true // Añadimos esta propiedad para el colapso de acciones
+      showDetails: false
     },
-    
    
     // Puedes añadir más elementos aquí si lo necesitas
   ];
@@ -236,12 +229,25 @@ export class RecepcionComponent {
     correspondence.showDetails = !correspondence.showDetails;
   }
 
-
-  toggleCollapse(correspondence: Correspondence) {
-    correspondence.isCollapsed = !correspondence.isCollapsed;
+  aceptar(correspondence: Correspondence): void {
+    Swal.fire({
+      title: '¿Desea continuar?',
+      text: 'Esta acción no se puede deshacer.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Aceptar',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('¡Aceptado!', 'La acción ha sido confirmada.', 'success');
+        console.log('Acción aceptada para:', correspondence);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelado', 'La acción ha sido cancelada.', 'info');
+      }
+    });
   }
-
-
+  
   rechazar(correspondence: Correspondence): void {
     Swal.fire({
       title: 'Motivo de Rechazo',
@@ -314,7 +320,9 @@ export class RecepcionComponent {
       }
     });
   }
+  
 }
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+

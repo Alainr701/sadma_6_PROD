@@ -1,0 +1,151 @@
+<div>
+   
+
+    <div class="container mt-4">
+      <div class="table-responsive">
+        <table class="table table-hover text-center align-middle">
+          <thead class="table-info">
+            <tr>
+              <th>CODIGO</th>
+              <th>REFERENCIA</th>
+              <th>DERIVADO DE </th>
+              <th> ACEPTADO POR</th>
+              <th>FECHA ACEPTACION</th>
+              <th>HISTORIAL</th>
+              <th>MAS DETALLES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let correspondence of correspondences">
+              <tr>
+                <td class="d-block d-md-table-cell text-wrap text-break">
+                  {{ correspondence.codigo }}
+                </td>
+                
+                <td class="d-block d-md-table-cell text-wrap text-break">
+                  {{ correspondence.referencia}}
+                </td>
+
+                <td class="d-block d-md-table-cell">
+                    <button type="button" class="btn btn-info" (click)="remitente(correspondence)">
+                        <i class="bi bi-person-circle"></i> Remitente
+                      </button>
+                </td>
+                <td class="d-block d-md-table-cell">
+                    <button type="button" class="btn btn-info" (click)="remisor(correspondence)">
+                        <i class="bi bi-person-circle"></i> Remitente
+                      </button>
+                </td>
+                <td class="d-block d-md-table-cell text-wrap text-break">
+                  <span class="badge bg-warning">{{ correspondence.fechaAceptacion}}</span>
+                </td>
+                <td class="d-block d-md-table-cell">
+                    <button class="btn btn-outline-primary" (click)="showHistorial(correspondence)">
+                      <i class="bi bi-file-earmark-text">Ver Historial</i>
+                    </button>
+                  </td>
+                <td class="d-block d-md-table-cell">
+                  <button class="btn btn-outline-primary" (click)="toggleDetails(correspondence)">
+                    <i class="bi bi-file-earmark-text">Mas Detalles</i>
+                  </button>
+                </td>
+              </tr>
+              <ng-container *ngIf="correspondence.showDetails">
+                <tr class="text-start">
+                    <th scope="row">Proveido</th>
+                    <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
+                      {{ correspondence.detalles.proveido }}
+                    </td>
+                  </tr>
+                  <tr class="text-start">
+                    <th scope="row">Accion</th>
+                    <td colspan="7">{{ correspondence.detalles.accion }}</td>
+                  </tr>
+                  <tr class="text-start">
+                    <th scope="row">descripcion</th>
+                    <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
+                      {{ correspondence.detalles.descripcion}}
+                    </td>
+                  </tr>
+                  <tr class="text-start">
+                    <th scope="row">Observacion</th>
+                    <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
+                      {{ correspondence.detalles.observacion }}
+                    </td>
+                  </tr>
+                  <tr class="text-start">
+                  <th scope="row">cite</th>
+                  <td colspan="7">{{ correspondence.detalles.cite }}</td>
+                   </tr>
+                
+                 <tr class="text-start">
+                  <th scope="row">Archivo</th>
+                  <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
+                    {{ correspondence.detalles.archivo}}
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- Historial Modal -->
+    <!-- Historial Modal -->
+    <div class="modal fade" id="historialModal" tabindex="-1" aria-labelledby="historialModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="historialModalLabel"><i class="bi bi-file-earmark-text">   Historial de Correspondencia </i></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div *ngIf="selectedCorrespondence && selectedCorrespondence.detalles.historial">
+              <table class="table table-dark table-hover">
+                <thead>
+                  <tr>
+                    <th class="col-nro">#</th>
+                    <th>Remitente</th>
+                    <th>Fecha Derivación</th>
+                    <th>Destinatario</th>
+                    <th>Fecha Recepción</th>
+                    <th>Proveído</th>
+                    <th>Observación</th>
+                    <th>Remisión</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let history of selectedCorrespondence.detalles.historial; let i = index">
+                    <td class="col-nro">{{ i + 1 }}</td>
+                    <td>{{ history.remitente }}</td>
+                    <td>{{ history.fechaDerivacion }}</td>
+                    <td>{{ history.destinatario }}</td>
+                    <td>{{ history.fechaRecepcion }}</td>
+                    <td>{{ history.proveido }}</td>
+                    <td>{{ history.observacion }}</td>
+                    <td>{{ history.remision }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div *ngIf="!selectedCorrespondence || !selectedCorrespondence.detalles.historial">
+              <p>No hay historial disponible.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+   
+    
+    
+    
+    <!-- Botón para regresar a la vista principal -->
+    <button class="btn btn-primary" (click)="volver()">Volver a la Bandeja Principal</button>
+  </div>
+  

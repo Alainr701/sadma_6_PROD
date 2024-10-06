@@ -1,81 +1,226 @@
-<div class="container mt-4">
-  <div class="table-responsive">
-    <table class="table table-hover text-center align-middle">
-      <thead class="table-info">
-        <tr>
-          <th>ACCIONES</th>
-          <th>CODIGO</th>
-          <th>REMITENTE</th>
-          <th>PLAZO (horas)</th>
-          <th>FECHA LÍMITE</th>
-          <th>PROVEÍDO</th>
-          <th>HISTORIAL</th>
-          <th>MAS DETALLES</th>
-        </tr>
-      </thead>
-      <tbody>
-        <ng-container *ngFor="let correspondence of correspondences">
-          <tr>
-            <td class="d-block d-md-table-cell">
-              <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary">
-                  <i class="bi bi-check2-circle"></i> Aceptar
+
+<form action="" class="search-bar">
+	<input type="search" name="search" pattern=".*\S.*" required>
+	<button class="search-btn" type="submit">
+		<span>Search</span>
+	</button>
+</form>
+
+<div class="container" style="margin-top: 30px;">
+    <div class="container">
+      <ng-container *ngFor="let correspondence of correspondences">
+        <div class="card mb-3" style="width: 72rem;">
+          <div class="card-header">
+            <div class="row">
+              <!-- Columna de títulos -->
+              <div class="col-md-5">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="letter-image">
+                    <div class="animated-mail">
+                      <div class="back-fold"></div>
+                      <div class="letter">
+                        <div class="letter-border"></div>
+                        <div class="letter-title"></div>
+                        <div class="letter-context"></div>
+                        <div class="letter-stamp"></div>
+                      </div>
+                      <div class="top-fold"></div>
+                      <div class="body"></div>
+                      <div class="left-fold"></div>
+                    </div>
+                    <div class="shadow"></div>
+                  </div>
+                  <span class="card-header-text">{{ correspondence.codigo }}</span>
+                </div>
+              </div>
+              <!-- Columna 2: Botones -->
+              <div class="col-md-4 btn-container">
+                <!-- Botones del mismo tamaño y espaciados -->
+                <button type="button" class="btn btn-outline-light d-flex flex-column align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <i class="bi bi-person-circle small-icono-btn fs-4"></i>
+                  <span>Remitente</span>
                 </button>
-                <button type="button" class="btn btn-secondary">
-                  <i class="bi bi-x-circle"></i> Rechazar
+                
+                <button class="btn btn-outline-light" (click)="aceptar(correspondence)">
+                  <i class="bi bi-envelope-check small-icono-btn fs-4"></i>
+                  <span>Aceptar</span>
+                </button>
+                <button class="btn btn-outline-light" (click)="rechazar(correspondence)">
+                  <i class="bi bi-envelope-arrow-up-fill small-icono-btn fs-4"></i>
+                  <span>Remitir</span>
+                </button>
+                <button class="btn btn-outline-light" (click)="toggleDetails(correspondence)">
+                  <i class="bi bi-envelope-paper fs-4"></i> Ver Más
                 </button>
               </div>
-            </td>
-            <td class="d-block d-md-table-cell text-wrap text-break">
-              {{ correspondence.codigo }}
-            </td>
-            <td class="d-block d-md-table-cell">
-              <button class="btn btn-outline-secondary">
-                <i class="bi bi-person-circle">{{ correspondence.remitente }}</i>
-              </button>
-            </td>
-            <td class="d-block d-md-table-cell text-wrap text-break">
-              {{ correspondence.plazo }}
-            </td>
-            <td class="d-block d-md-table-cell text-wrap text-break">
-              <span class="badge bg-warning">{{ correspondence.fechaLimite }}</span>
-            </td>
-            <td class="d-block d-md-table-cell text-wrap text-break">
-              {{ correspondence.proveido }}
-            </td>
-            <td class="d-block d-md-table-cell">
-              <button class="btn btn-outline-primary">
-                <i class="bi bi-file-earmark-text">Ver Historial</i>
-              </button>
-            </td>
-            <td class="d-block d-md-table-cell">
-              <button class="btn btn-outline-primary" (click)="toggleDetails(correspondence)">
-                <i class="bi bi-file-earmark-text">Mas Detalles</i>
-              </button>
-            </td>
-          </tr>
-          <ng-container *ngIf="correspondence.showDetails">
-            <tr class="text-start">
-              <th scope="row">Codigo</th>
-              <td colspan="7">{{ correspondence.detalles.codigo }}</td>
-            </tr>
-            <tr class="text-start">
-              <th scope="row">Accion</th>
-              <td colspan="7">{{ correspondence.detalles.accion }}</td>
-            </tr>
-            <tr class="text-start">
-              <th scope="row">Fecha de derivacion</th>
-              <td colspan="7">{{ correspondence.detalles.fechaDerivacion }}</td>
-            </tr>
-            <tr class="text-start">
-              <th scope="row">Observacion</th>
-              <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
-                {{ correspondence.detalles.observacion }}
-              </td>
-            </tr>
-          </ng-container>
-        </ng-container>
-      </tbody>
-    </table>
+              <!-- Columna 3: Información -->
+              <div class="col-md-3 d-flex flex-column align-items-start">
+                <div class="d-flex align-items-center mb-2">
+                  <strong style="font-size: 0.7rem;">
+                    <i class="bi bi-hourglass small-icon me-1"></i> PLAZO (Días): {{ correspondence.plazo }}
+                  </strong>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                  <strong class="badge bg-warning" style="font-size: 0.7rem;">
+                    <i class="bi bi-calendar-check small-icon me-1"></i> FECHA LÍMITE: {{ correspondence.fechaLimite }}
+                  </strong>
+                </div>
+                <div class="d-flex align-items-center">
+                  <strong style="font-size: 0.7rem;">
+                    <i class="bi bi-arrow-right-circle small-icon me-1"></i> FECHA DERIVACIÓN: {{ correspondence.fechaDerivacion }}
+                  </strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Detalles externos a la tarjeta -->
+        <div class="details-container mb-3" [ngClass]="{'d-none': !correspondence.showDetails}" style="background-color: transparent; border: none;">
+          <div class="table-responsive">
+            <table class="table table-hover mb-3 w-100 text-center custom-font fs-7">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 33%;"><strong><i class="bi bi-file-earmark-check fs-3"></i> PROVEIDO:</strong></th>
+                  <th scope="col" style="width: 34%;"><strong><i class="bi bi-info-circle fs-3"></i> DESCRIPCIÓN:</strong></th>
+                  <th scope="col" style="width: 33%;"><strong><i class="bi bi-link-45deg fs-3"></i> REFERENCIA:</strong></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-wrap text-break">{{ correspondence.detalles.proveido }}</td>
+                  <td class="text-wrap text-break">{{ correspondence.detalles.descripcion }}</td>
+                  <td class="text-wrap text-break">{{ correspondence.detalles.referencia }}</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 33%;"><strong><i class="bi bi-file-text fs-3"></i> OBSERVACIÓN:</strong></th>
+                  <th scope="col" style="width: 34%;"><strong><i class="bi bi-buildings fs-3"></i> CITE:</strong></th>
+                  <th scope="col" style="width: 33%;"><strong><i class="bi bi-box-arrow-up-right fs-3"></i> ACCIÓN:</strong></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-wrap text-break">{{ correspondence.detalles.observacion }}</td>
+                  <td class="text-wrap text-break">{{ correspondence.detalles.cite }}</td>
+                  <td class="text-wrap text-break">{{ correspondence.detalles.accion }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-info" style="background-color: rgba(23, 162, 184, 0.5); border-color: rgba(23, 162, 184, 0.5); color: white;">
+              <i class="bi bi-file-earmark-pdf-fill"> Ver Documento</i>
+            </button>
+            <button class="btn btn-info" 
+        style="background-color: rgba(23, 162, 184, 0.5); border-color: rgba(23, 162, 184, 0.5); color: white;" 
+        (click)="showHistorial(correspondence)">
+  <i class="bi bi-file-earmark-pdf-fill"> Ver Historial</i>
+</button>
+
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
-</div>
+
+
+   <!-- Historial Modal -->
+   <div class="modal fade" id="historialModal" aria-labelledby="historialModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content custom-modal-content">
+        <div class="modal-header py-0">
+          <h5 class="modal-title" id="historialModalLabel"><i class="bi bi-file-earmark-text"></i> Historial de Correspondencia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-0">
+          <div *ngIf="selectedCorrespondence && selectedCorrespondence.detalles.historial" class="table-responsive">
+            <table mat-table [dataSource]="historialDataSource" matSort (matSortChange)="sortData($event)" class="w-100">
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> # </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="remitente">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Remitente </th>
+                <td mat-cell *matCellDef="let element"> {{element.remitente}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="fechaDerivacion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Derivación </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechaDerivacion}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="destinatario">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Destinatario </th>
+                <td mat-cell *matCellDef="let element"> {{element.destinatario}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="fechaRecepcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Recepción </th>
+                <td mat-cell *matCellDef="let element"> {{element.fechaRecepcion}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="proveido">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Proveído </th>
+                <td mat-cell *matCellDef="let element"> {{element.proveido}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="observacion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Observación </th>
+                <td mat-cell *matCellDef="let element"> {{element.observacion}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="remision">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Remisión </th>
+                <td mat-cell *matCellDef="let element"> {{element.remision}} </td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+  
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                           showFirstLastButtons
+                           aria-label="Select page of historial elements">
+            </mat-paginator>
+          </div>
+          <div *ngIf="!selectedCorrespondence || !selectedCorrespondence.detalles.historial">
+            <p class="m-0 p-3">No hay historial disponible.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+     <!-- Remitente modal--> 
+  <!-- Modal -->
+   
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <!-- Header del modal con botón cerrar alineado a la izquierda -->
+        <div class="modal-header d-flex justify-content-start">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <!-- Cuerpo del modal -->
+        <div class="modal-body text-center">
+          <!-- Imagen del perfil -->
+          <img src="../../../../../app/USUARIO.png" class="rounded-circle mb-3" alt="Imagen del perfil" style="width: 100px; height: 100px;">
+          <!-- Nombre del usuario -->
+          <h5 class="fw-bold text-success">JOSMEL ALDO YAÑEZ TRUJILLO</h5>
+          <hr>
+          <!-- Información adicional -->
+          <p><strong> <i class="bi bi-building icono icono-dependencia"></i>DEPENDENCIA:</strong> SUB ALCALDIA DISTRITO MUNICIPAL-6</p>
+          <p><strong><i class="bi-person-badge icono icono-cargo"></i>CARGO:</strong> RECEPCIONISTA</p>
+          <p><strong><i class="bi-hash icono icono-numero"></i>NUMERO CEL:</strong> 78956325</p>
+        </div>
+        <!-- Footer del modal con botón de cerrar -->
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 25px;">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

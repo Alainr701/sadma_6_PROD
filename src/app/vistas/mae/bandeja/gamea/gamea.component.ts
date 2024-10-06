@@ -26,8 +26,8 @@ interface Remitente{
 interface Correspondence {
   id: number;
   codigo: string;
-  plazo: string;
-  fechaLimite: string;
+  respuesta: string;
+  
   fechaDerivacion: string;
   
   detalles: {
@@ -44,13 +44,12 @@ interface Correspondence {
   isCollapsed?: boolean;
 }
 
-
 @Component({
-  selector: 'app-recepcion',
-  templateUrl: './recepcion.component.html',
-  styleUrls: ['./recepcion.component.css']
+  selector: 'app-gamea',
+  templateUrl: './gamea.component.html',
+  styleUrls: ['./gamea.component.css']
 })
-export class RecepcionComponent {
+export class GameaComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -59,8 +58,8 @@ export class RecepcionComponent {
     {
       id: 1,
       codigo: 'SADM6-0096-2024',
-      plazo: '(2)\n48 horas',
-      fechaLimite: '19-08-2024 09:13:30',
+      respuesta: '(2)\n48 horas',
+     
       fechaDerivacion: '19-08-2024 09:13:30',
       detalles: {
         cite: 'GAMEA-67570-2024',
@@ -140,8 +139,8 @@ export class RecepcionComponent {
     {
       id: 1,
       codigo: 'SADM6-0096-2024',
-      plazo: '(2)\n48 horas',
-      fechaLimite: '19-08-2024 09:13:30',
+      respuesta: '(2)\n48 horas',
+      
       fechaDerivacion: '19-08-2024 09:13:30',
       detalles: {
         cite: 'GAMEA-67570-2024',

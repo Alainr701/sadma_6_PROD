@@ -12,6 +12,15 @@ import { BandejaComponent } from './vistas/mae/bandeja/bandeja.component';
 import { ConcluidosComponent } from './vistas/mae/bandeja/concluidos/concluidos.component';
 import { EntradaCComponent } from './vistas/mae/bandeja/entrada-c/entrada-c.component';
 import { RecepcionComponent } from './vistas/mae/bandeja/recepcion/recepcion.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { GameaComponent } from './vistas/mae/bandeja/gamea/gamea.component';
+import { DestiempoComponent } from './vistas/mae/bandeja/destiempo/destiempo.component';
+import { CabezeraComponent } from './shared/cabezera/cabezera.component';
+import { Detalle1Component } from './vistas/mae/bandeja-principal/detalle1/detalle1.component';
+
 
 
 @NgModule({
@@ -23,7 +32,11 @@ import { RecepcionComponent } from './vistas/mae/bandeja/recepcion/recepcion.com
     ConcluidosComponent,
     EntradaCComponent,
     BandejaComponent,
-    RecepcionComponent
+    RecepcionComponent,
+    GameaComponent,
+    DestiempoComponent,
+    CabezeraComponent,
+    Detalle1Component
     
   ],
   imports: [
@@ -31,7 +44,12 @@ import { RecepcionComponent } from './vistas/mae/bandeja/recepcion/recepcion.com
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

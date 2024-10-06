@@ -44,15 +44,11 @@
               <!-- Columna 3: Información -->
               <div class="col-md-4 d-flex flex-column align-items-start">
                 <div class="d-flex align-items-center mb-2">
-                  <strong style="font-size: 0.7rem;">
-                    <i class="bi bi-hourglass small-icon me-1"></i> PLAZO (Días): {{ correspondence.plazo }}
+                  <strong class="badge bg-info" style="font-size: 0.7rem;">
+                    <i class="bi bi-hourglass small-icon me-1"></i> TIEMPO  DE ESPERA (Días): {{ correspondence.respuesta }}
                   </strong>
                 </div>
-                <div class="d-flex align-items-center mb-2">
-                  <strong class="badge bg-warning" style="font-size: 0.7rem;">
-                    <i class="bi bi-calendar-check small-icon me-1"></i> FECHA LÍMITE: {{ correspondence.fechaLimite }}
-                  </strong>
-                </div>
+                
                 <div class="d-flex align-items-center">
                   <strong style="font-size: 0.7rem;">
                     <i class="bi bi-arrow-right-circle small-icon me-1"></i> FECHA DERIVACIÓN: {{ correspondence.fechaDerivacion }}
@@ -221,3 +217,4 @@
     </div>
   </div>
   
+

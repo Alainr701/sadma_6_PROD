@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 export class MenuBarComponent {
   menuItems = [
-    { label: 'Home', link: '/login' ,icon: 'bi bi-envelope', badge: 169 },
-    { label: 'About', link: '/mae/inicio', icon: 'bi bi-file-earmark-plus' },
-    { label: 'Services', link: '/mae/bandeja', icon: 'bi bi-file-earmark-text' },
+    { label: 'Home', link: '/mae/bandeja' ,icon: 'bi bi-envelope', badge: 169 },
+    { label: 'Esto a donde', link: '/mae/inicio', icon: 'bi bi-file-earmark-plus' },
+    { label: 'Control de Correspondencia', link: '/mae/bandeja-principal', icon: 'bi bi-file-earmark-text' },
     { label: 'Contact', link: '/contact', icon: 'bi bi-telephone' },
     { label: 'Help', link: '/help',icon: 'bi bi-person' }
   ];
