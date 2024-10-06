@@ -1,0 +1,254 @@
+.card {
+    border: 0;
+    border-radius: 0;
+    color: #fff;
+    box-shadow: 5px 5px 10px #e1e1e1;
+    padding: 2em 4em;
+    border-bottom-right-radius: 4em;
+    border-top-left-radius: 4em;
+    background: linear-gradient(to left, 
+                rgba(43, 110, 158, 0.5) 0%, rgb(226, 198, 225) 50%, rgba(15, 152, 226, 1)
+                50%, rgba(201, 222, 165, 1)
+                100%);
+    background-size: 200%;
+    background-position: right;
+    transition: background-position 0.5s ease-out;
+}
+
+.card:hover {
+    background-position: left;
+}
+
+.card-header {
+    margin-top: -1em;
+    padding-bottom: 0.5em;
+}
+
+.card-header .row {
+    align-items: center;
+}
+
+.small-icon {
+    font-size: 16px;
+}
+
+.small-icono {
+    font-size: 75px;
+    position: relative;
+    top: -10px;
+    margin-left: 20px;
+}
+
+.small-icono-btn {
+    font-size: 19px;
+    position: relative;
+    top: -2px;
+    margin-left: 6px;
+}
+
+.card-header-text {
+    font-size: 26px;
+    font-family: Arial, sans-serif;
+    position: relative;
+    top: -25px;
+    left: 10px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -25px;
+}
+
+.btn-container .btn {
+    flex: 1;
+    margin: 0 2px;
+    font-size: 13px;
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-width: 10px;
+    max-width: 80px;
+}
+
+.custom-font {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Estilos para el sobre animado */
+.letter-image {
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    position: relative;
+}
+
+.animated-mail {
+    position: absolute;
+    height: 60px;
+    width: 80px;
+    transition: .4s;
+}
+
+.body {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 40px 80px;
+    border-color: transparent transparent #e95f55 transparent;
+    z-index: 2;
+}
+
+.top-fold {
+    position: absolute;
+    top: 20px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 20px 40px 0 40px;
+    transform-origin: 50% 0%;
+    transition: transform .4s .4s, z-index .2s .4s;
+    border-color: #cf4a43 transparent transparent transparent;
+    z-index: 2;
+}
+
+.back-fold {
+    position: absolute;
+    bottom: 0;
+    width: 80px;
+    height: 40px;
+    background: #cf4a43;
+    z-index: 0;
+}
+
+.left-fold {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 20px 0 20px 40px;
+    border-color: transparent transparent transparent #e15349;
+    z-index: 2;
+}
+
+.letter {
+    left: 8px;
+    bottom: 0px;
+    position: absolute;
+    width: 64px;
+    height: 24px;
+    background: white;
+    z-index: 1;
+    overflow: hidden;
+    transition: .4s .2s;
+}
+
+.letter-border {
+    height: 4px;
+    width: 100%;
+    background: repeating-linear-gradient(-45deg, #cb5a5e, #cb5a5e 3px, transparent 3px, transparent 7px);
+}
+
+.letter-title, .letter-context {
+    height: 4px;
+    background: #cb5a5e;
+}
+
+.letter-title {
+    width: 40%;
+    margin: 4px 0 0 2px;
+}
+
+.letter-context {
+    width: 20%;
+    margin: 4px 0 0 2px;
+}
+
+.letter-stamp {
+    margin: 12px 0 0 48px;
+    border-radius: 100%;
+    height: 12px;
+    width: 12px;
+    background: #cb5a5e;
+    opacity: 0.3;
+}
+
+.shadow {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    width: 160px;
+    height: 12px;
+    transition: .4s;
+    transform: translateX(-50%);
+    border-radius: 100%;
+    background: radial-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.0), rgba(0,0,0,0.0));
+}
+
+/* Nuevas reglas para la animación de la carta */
+.card .letter-image .animated-mail {
+    transition: transform 0.5s ease-out;
+}
+
+.card .letter-image .animated-mail .top-fold {
+    transition: transform 0.4s 0.4s, z-index 0.2s 0.4s;
+}
+
+.card .letter-image .animated-mail .letter {
+    transition: height 0.4s 0.2s;
+}
+
+.card .letter-image .shadow {
+    transition: width 0.4s;
+}
+
+/* Activar la animación de la carta cuando la tarjeta cambia de color */
+.card:hover .letter-image .animated-mail {
+    transform: translateY(20px);
+}
+
+.card:hover .letter-image .animated-mail .top-fold {
+    transition: transform 0.4s, z-index 0.2s;
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+.card:hover .letter-image .animated-mail .letter {
+    height: 72px;
+}
+
+.card:hover .letter-image .shadow {
+    width: 100px;
+}
+
+
+/* Ajustes para la disposición del sobre y el texto */
+.col-md-5 > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .letter-image {
+    /* Ajusta estos valores según sea necesario */
+    flex: 0 0 auto;
+    margin-right: 20px;
+  }
+  
+  .card-header-text {
+    flex: 1 1 auto;
+    text-align: right;
+    /* Elimina las propiedades de posicionamiento que ya no son necesarias */
+    position: static;
+    top: auto;
+    left: auto;
+  }
