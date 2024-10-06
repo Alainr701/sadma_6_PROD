@@ -7,19 +7,47 @@ import { BandejaComponent } from './vistas/mae/bandeja/bandeja.component';
 import { MenuBarComponent } from './shared/menu-bar/menu-bar.component';
 import { BandejaPrincipalComponent } from './vistas/mae/bandeja-principal/bandeja-principal.component';
 import { Detalle1Component } from './vistas/mae/bandeja-principal/detalle1/detalle1.component';
+import { InitComponent } from './vistas/mae/init/init.component';
+import { RecepcionComponent } from './vistas/mae/bandeja/recepcion/recepcion.component';
+import { CorrespondenciasComponent } from './vistas/mae/correspondencias/correspondencias.component';
 
 
 const routes: Routes = [
+  { path: '', component: LoginComponent },
+  // login
   { path: 'login', component: LoginComponent },
-  { path: 'mae', component: MenuBarComponent },
-  { path: 'mae/inicio', component: InicioComponent },
+  //dashboard
+  { 
+    path: 'mae', component: MenuBarComponent,
+     children: [
+    { 
+      path: '', component: InitComponent,
+    },
+    { 
+      path: 'bandeja', component: BandejaComponent,
+    },
+    { 
+      path: 'correspondencias', component: CorrespondenciasComponent,
+    },
+    { 
+      path: 'control', component: BandejaPrincipalComponent,
+    },
+    { 
+      path: 'asd', component: InitComponent,
+    },
+   
+    {
+      path: 'bandeja-principal', component:BandejaPrincipalComponent
+    },
+    ] 
+},
   // { path: 'mae/inicio', component: MenuBarComponent },
-  { path: 'mae/bandeja-principal', component:BandejaPrincipalComponent},
-  { path: 'mae/bandeja', component: BandejaComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // { path: 'mae/bandeja-principal', component:BandejaPrincipalComponent},
+  // { path: 'mae/bandeja', component: BandejaComponent },
+  // { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-  { path: '', component: BandejaPrincipalComponent }, // Ruta principal
-  { path: 'detalle/:id', component: Detalle1Component }, // Ruta para el detalle
+  // { path: '', component: BandejaPrincipalComponent }, // Ruta principal
+  // { path: 'detalle/:id', component: Detalle1Component }, // Ruta para el detalle
   
  
 ];

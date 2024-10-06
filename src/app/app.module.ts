@@ -20,6 +20,9 @@ import { GameaComponent } from './vistas/mae/bandeja/gamea/gamea.component';
 import { DestiempoComponent } from './vistas/mae/bandeja/destiempo/destiempo.component';
 import { CabezeraComponent } from './shared/cabezera/cabezera.component';
 import { Detalle1Component } from './vistas/mae/bandeja-principal/detalle1/detalle1.component';
+import { InitComponent } from './vistas/mae/init/init.component';
+import { HojaRutaComponent } from './vistas/mae/hoja-ruta/hoja-ruta.component';
+import { CorrespondenciasComponent } from './vistas/mae/correspondencias/correspondencias.component';
 
 
 
@@ -36,7 +39,10 @@ import { Detalle1Component } from './vistas/mae/bandeja-principal/detalle1/detal
     GameaComponent,
     DestiempoComponent,
     CabezeraComponent,
-    Detalle1Component
+    Detalle1Component,
+    InitComponent,
+    HojaRutaComponent,
+    CorrespondenciasComponent
     
   ],
   imports: [

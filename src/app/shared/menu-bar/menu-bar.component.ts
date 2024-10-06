@@ -7,17 +7,22 @@ import { Component } from '@angular/core';
 })
 export class MenuBarComponent {
   menuItems = [
-    { label: 'Home', link: '/mae/bandeja' ,icon: 'bi bi-envelope', badge: 169 },
-    { label: 'Esto a donde', link: '/mae/inicio', icon: 'bi bi-file-earmark-plus' },
-    { label: 'Control de Correspondencia', link: '/mae/bandeja-principal', icon: 'bi bi-file-earmark-text' },
-    { label: 'Contact', link: '/contact', icon: 'bi bi-telephone' },
-    { label: 'Help', link: '/help',icon: 'bi bi-person' }
+    { label: 'Bandeja', link: '/mae/bandeja' ,icon: 'bi bi-envelope'},
+    { label: 'Crear Correspondencia', link: '/mae/correspondencias' ,icon: 'bi bi-envelope', badge: 169 },
+    { label: 'Control de Correspondencia', link: '/mae/control' ,icon: 'bi bi-envelope' },
+    // { label: 'Home', link: '/mae/bandeja' ,icon: 'bi bi-envelope', badge: 169 },
+    // { label: 'Esto a donde', link: '/mae/inicio', icon: 'bi bi-file-earmark-plus' },
+    // { label: 'Control de Correspondencia', link: '/mae/bandeja-principal', icon: 'bi bi-file-earmark-text' },
+    // { label: 'Contact', link: '/contact', icon: 'bi bi-telephone' },
+    // { label: 'Help', link: '/help',icon: 'bi bi-person' }
   ];
-  home = this.menuItems[0]; 
-  about = this.menuItems[1];
-  services = this.menuItems[2];
-  contact = this.menuItems[3];
-  help = this.menuItems[4];
+
+  bandeja = this.menuItems[0]; 
+  correspondencia = this.menuItems[1]; 
+  control = this.menuItems[2];
+//   services = this.menuItems[2];
+//   contact = this.menuItems[3];
+//   help = this.menuItems[4];
 
   
 
