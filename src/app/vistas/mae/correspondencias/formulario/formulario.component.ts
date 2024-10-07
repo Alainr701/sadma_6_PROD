@@ -12,7 +12,8 @@ interface Documento {
   dependencia: string;
   contacto: string;
   categoria: string;
-  tipoDocumento: string;
+  documento: string;
+  tipoDocumento?: string;
 }
 
 
@@ -46,7 +47,8 @@ export class FormularioComponent {
       dependencia: 'SUB ALCALDÍA DISTRITO MUNICIPAL-6',
       contacto: '70146214',
       categoria: '',
-      tipoDocumento: '',
+      documento: 'CORRESPONDENCIA',
+    
     };
   }
 
@@ -68,6 +70,14 @@ export class FormularioComponent {
       this.mostrarError();
     }
   }
+  guardarCorrespondencia(){
+    console.log('=================================');
+    console.log(JSON.stringify(this.documento, null, 2));
+    console.log('=================================');;
+  }
+
+
+
 
   mostrarConfirmacion() {
     Swal.fire({

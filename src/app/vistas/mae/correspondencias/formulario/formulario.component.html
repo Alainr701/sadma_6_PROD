@@ -73,8 +73,8 @@
 
         <!-- Desplegable para Tipo de Documento -->
         <div class="col-md-6">
-          <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
-          <select id="tipoDocumento" class="form-select" required>
+          <label for="documento" class="form-label">Tipo de Documento</label>
+          <select id="documento" class="form-select" required>
             <option value="" disabled selected>Seleccione un tipo de documento</option>
             <option value="registrovisado">Registro Visado de Plano de DDRR</option>
             <option value="ventanillaunica">Ventanilla Única</option>
@@ -101,7 +101,10 @@
     <!-- Botones de acción -->
     <div class="d-flex justify-content-end">
       <button class="btn btn-secondary me-2">Cancelar</button>
-      <button class="btn btn-primary">Aceptar</button>
+      <button 
+      class="btn btn-primary"
+      (click)="guardarCorrespondencia()"
+      >Aceptar</button>
     </div>
   </div>
 </div>
