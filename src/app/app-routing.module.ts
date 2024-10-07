@@ -10,9 +10,11 @@ import { Detalle1Component } from './vistas/mae/bandeja-principal/detalle1/detal
 import { InitComponent } from './vistas/mae/init/init.component';
 import { RecepcionComponent } from './vistas/mae/bandeja/recepcion/recepcion.component';
 import { CorrespondenciasComponent } from './vistas/mae/correspondencias/correspondencias.component';
+import { FormularioComponent } from './vistas/mae/correspondencias/formulario/formulario.component';
 
 
 const routes: Routes = [
+  
   { path: '', component: LoginComponent },
   // login
   { path: 'login', component: LoginComponent },
@@ -30,7 +32,7 @@ const routes: Routes = [
       path: 'correspondencias', component: CorrespondenciasComponent,
     },
     { 
-      path: 'control', component: BandejaPrincipalComponent,
+      path: 'control', component: FormularioComponent,
     },
     { 
       path: 'asd', component: InitComponent,
@@ -39,6 +41,7 @@ const routes: Routes = [
     {
       path: 'bandeja-principal', component:BandejaPrincipalComponent
     },
+    
     ] 
 },
   // { path: 'mae/inicio', component: MenuBarComponent },

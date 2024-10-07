@@ -1,0 +1,107 @@
+<div class="card">
+  <div class="card-body">
+    <!-- Sección de Documento -->
+    <fieldset class="border p-3 mb-3">
+      <legend class="w-auto px-2">DOCUMENTO</legend>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="referencia" class="form-label">Referencia</label>
+          <textarea id="referencia" class="form-control" rows="2" placeholder="REF. DOCUMENTO"></textarea>
+        </div>
+        <div class="col-md-6">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea id="descripcion" class="form-control" rows="2" placeholder="DESCRIBIR CONTENIDO"></textarea>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-6">
+          <label for="observacion" class="form-label">Observación</label>
+          <textarea id="observacion" class="form-control" rows="2" placeholder="¿EXISTE ALGUNA OBSERVACIÓN?"></textarea>
+        </div>
+        <div class="col-md-6">
+          <label for="cite" class="form-label">CITE</label>
+          <input type="text" id="cite" class="form-control" placeholder="EJEMPLO: SMAF/DA/US/RETY/054/2021">
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Sección de Datos Remitente -->
+    <fieldset class="border p-3 mb-3">
+      <legend class="w-auto px-2">DATOS REMITENTE</legend>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="nombreRemitente" class="form-label">Nombre del Remitente</label>
+          <input type="text" id="nombreRemitente" class="form-control" value="HUASCAR ANDREUS VEGA QUIROGA" disabled>
+        </div>
+        <div class="col-md-6">
+          <label for="cargoRemitente" class="form-label">Cargo del Remitente</label>
+          <input type="text" id="cargoRemitente" class="form-control" value="RECEPCIONISTA" disabled>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col-md-6">
+          <label for="dependencia" class="form-label">Dependencia Remitente</label>
+          <input type="text" id="dependencia" class="form-control" value="SUB ALCALDÍA DISTRITO MUNICIPAL-6" disabled>
+        </div>
+        <div class="col-md-6">
+          <label for="contacto" class="form-label">Nro. de Contacto</label>
+          <input type="text" id="contacto" class="form-control" value="70146214" disabled>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Sección de Categoría y Tipo de Documento -->
+    <fieldset class="border p-3 mb-3">
+      <legend class="w-auto px-2">Categoría y Tipo de Documento</legend>
+      <div class="row">
+        <!-- Sección de Categoría -->
+        <div class="col-md-6">
+          <label for="categoria" class="form-label">Categoría</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="categoria" id="urgente" value="Urgente" required>
+            <label class="form-check-label" for="urgente">Urgente</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="categoria" id="prioritario" value="Prioritario" required>
+            <label class="form-check-label" for="prioritario">Prioritario</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="categoria" id="rutinario" value="Rutinario" required checked>
+            <label class="form-check-label" for="rutinario">Rutinario</label>
+          </div>
+        </div>
+
+        <!-- Desplegable para Tipo de Documento -->
+        <div class="col-md-6">
+          <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
+          <select id="tipoDocumento" class="form-select" required>
+            <option value="" disabled selected>Seleccione un tipo de documento</option>
+            <option value="registrovisado">Registro Visado de Plano de DDRR</option>
+            <option value="ventanillaunica">Ventanilla Única</option>
+            <option value="notasejecutivo">Notas al Ejecutivo</option>
+            <option value="peticioninforme">Petición de Informe Escrito</option>
+            <option value="registrocatastro">Registro de Catastro</option>
+            <option value="registroplanoconstruccion">Registro Plano de Construcción</option>
+            <option value="registroplanolineanivel">Registro Plano de Línea de Nivel</option>
+            <option value="registrocomun">Registro Común</option>
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <!-- Sección de Subir Archivos -->
+    <fieldset class="border p-3 mb-3">
+      <legend class="w-auto px-2">SUBIR ARCHIVOS</legend>
+      <p>Nota: Los archivos deben estar en formato PDF y no deben pesar más de 2MB.</p>
+      <button class="btn btn-success">
+        <i class="fas fa-upload"></i> Subir Archivo
+      </button>
+    </fieldset>
+
+    <!-- Botones de acción -->
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-secondary me-2">Cancelar</button>
+      <button class="btn btn-primary">Aceptar</button>
+    </div>
+  </div>
+</div>

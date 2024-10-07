@@ -23,6 +23,7 @@ import { Detalle1Component } from './vistas/mae/bandeja-principal/detalle1/detal
 import { InitComponent } from './vistas/mae/init/init.component';
 import { HojaRutaComponent } from './vistas/mae/hoja-ruta/hoja-ruta.component';
 import { CorrespondenciasComponent } from './vistas/mae/correspondencias/correspondencias.component';
+import { FormularioComponent } from './vistas/mae/correspondencias/formulario/formulario.component';
 
 
 
@@ -42,7 +43,8 @@ import { CorrespondenciasComponent } from './vistas/mae/correspondencias/corresp
     Detalle1Component,
     InitComponent,
     HojaRutaComponent,
-    CorrespondenciasComponent
+    CorrespondenciasComponent,
+    FormularioComponent
     
   ],
   imports: [
@@ -55,6 +57,7 @@ import { CorrespondenciasComponent } from './vistas/mae/correspondencias/corresp
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    
     
   ],
   providers: [],
