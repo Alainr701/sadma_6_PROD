@@ -93,9 +93,12 @@
     <fieldset class="border p-3 mb-3">
       <legend class="w-auto px-2">SUBIR ARCHIVOS</legend>
       <p>Nota: Los archivos deben estar en formato PDF y no deben pesar más de 2MB.</p>
-      <button class="btn btn-success">
+      <input type="file" id="archivo"
+      >
+      <!-- (change)="subirArchivo($event.target.files)" -->
+      <!-- <button class="btn btn-success" (click)="subirArchivo()">
         <i class="fas fa-upload"></i> Subir Archivo
-      </button>
+      </button> -->
     </fieldset>
 
     <!-- Botones de acción -->

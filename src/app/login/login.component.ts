@@ -11,7 +11,9 @@ export class LoginComponent {
 
   constructor(
     
-    private loginService: LoginService, private router: Router) { 
+    private loginService: LoginService,
+    private router: Router,
+  ) { 
 
   }
   email: string = '';
