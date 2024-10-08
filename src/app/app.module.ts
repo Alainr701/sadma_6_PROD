@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // Import the FormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import the FormsModule
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -49,6 +49,7 @@ import { FormularioComponent } from './vistas/mae/correspondencias/formulario/fo
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,

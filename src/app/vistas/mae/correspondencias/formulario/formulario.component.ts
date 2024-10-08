@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ResponseI } from 'src/app/interfaces/response';
+import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
+import { FileUtils } from 'src/app/utils/file-utils';
 import Swal from 'sweetalert2';
 
 interface Documento {
@@ -11,11 +14,10 @@ interface Documento {
   cargoRemitente: string;
   dependencia: string;
   contacto: string;
-  categoria: string;
+  categoria: string; 
   documento: string;
-  tipoDocumento?: string;
+  tipoDocumento?: string;   
 }
-
 
 @Component({
   selector: 'app-formulario',
@@ -27,14 +29,13 @@ export class FormularioComponent {
   formulario: FormGroup;
   documento: Documento;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private correspondenciaService: CorrespondenciaService) {
     this.formulario = this.fb.group({
       referencia: ['', Validators.required],
       descripcion: ['', Validators.required],
       observacion: [''],
       cite: ['', Validators.required],
       categoria: ['', Validators.required],
-      tipoDocumento: ['', Validators.required],
     });
 
     this.documento = {
@@ -54,30 +55,27 @@ export class FormularioComponent {
 
   ngOnInit(): void {}
 
-  onSubmit() {
+  async onSubmit() {
+    console.log('=================================');
+    console.log(JSON.stringify(this.formulario.value, null, 2));
+    console.log(`${this.formulario}`);
+    console.log('=================================');
+    // debugger
     if (this.formulario.valid) {
       this.documento.referencia = this.formulario.get('referencia')?.value;
       this.documento.descripcion = this.formulario.get('descripcion')?.value;
       this.documento.observacion = this.formulario.get('observacion')?.value;
       this.documento.cite = this.formulario.get('cite')?.value;
       this.documento.categoria = this.formulario.get('categoria')?.value;
-      this.documento.tipoDocumento = this.formulario.get('tipoDocumento')?.value;
-
       console.log('Datos del documento:', this.documento);
-
+      let  res :ResponseI = await this.correspondenciaService.sendCorrespondencia(this.documento);
+      debugger
       this.mostrarConfirmacion();
     } else {
       this.mostrarError();
     }
   }
-  guardarCorrespondencia(){
-    console.log('=================================');
-    console.log(JSON.stringify(this.documento, null, 2));
-    console.log('=================================');;
-  }
-
-
-
+  
 
   mostrarConfirmacion() {
     Swal.fire({
@@ -96,5 +94,9 @@ export class FormularioComponent {
       icon: 'error',
       confirmButtonText: 'Cerrar',
     });
+  }
+  subirArchivo(event: any) {
+    const archivo = event.target.files[0];
+    FileUtils.convertFileToBase64(archivo).then(base64 => this.documento.documento = base64 as string);
   }
 }
