@@ -61,18 +61,19 @@
 
           <!-- Desplegable para Tipo de Documento -->
           <div class="col-md-6">
-            <label for="documento" class="form-label">Tipo de Documento</label>
-            <select id="documento" class="form-select" required>
+            <label for="tipoDocumento" class="form-label">Tipo de Documento</label>
+            <select id="tipoDocumento" formControlName="tipoDocumento" class="form-select"  required>
               <option value="" disabled selected>Seleccione un tipo de documento</option>
-              <option value="registrovisado">Registro Visado de Plano de DDRR</option>
-              <option value="ventanillaunica">Ventanilla Única</option>
-              <option value="notasejecutivo">Notas al Ejecutivo</option>
-              <option value="peticioninforme">Petición de Informe Escrito</option>
-              <option value="registrocatastro">Registro de Catastro</option>
-              <option value="registroplanoconstruccion">Registro Plano de Construcción</option>
-              <option value="registrocomun">Registro Común</option>
+              <option value="REGISTROVISADO">Registro Visado de Plano de DDRR</option>
+              <option value="VENTANILLA UNICA">Ventanilla Única</option>
+              <option value="NOTAS EJECUTIVO">Notas al Ejecutivo</option>
+              <option value="PETICION INFORME">Petición de Informe Escrito</option>
+              <option value="REGISTRO CATASTRO">Registro de Catastro</option>
+              <option value="REGISTRO PLANO CONSTRUCCION">Registro Plano de Construcción</option>
+              <option value="REGISTRO COMUN">Registro Común</option>
             </select>
           </div>
+
         </div>
       </fieldset>
 

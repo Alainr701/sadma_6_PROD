@@ -1,22 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResponseI } from 'src/app/interfaces/response';
+import { AppService } from 'src/app/servicios/app.service';
 import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
 import { FileUtils } from 'src/app/utils/file-utils';
 import Swal from 'sweetalert2';
 
 interface Documento {
-  referencia: string;
-  descripcion: string;
-  observacion: string;
-  cite: string;
-  nombreRemitente: string;
-  cargoRemitente: string;
-  dependencia: string;
-  contacto: string;
-  categoria: string; 
-  documento: string;
-  tipoDocumento?: string;   
+    referencia: any;
+    descripcion: any;
+    observacion: any;
+    cite: any;
+    tipo: any;
+    categoria: any;
+    documento: any;
+    usu_cre: any;
+    estado: any;
+    id_documentos: any;
+    id_personas: any;
+  
 }
 
 @Component({
@@ -27,30 +29,44 @@ interface Documento {
 export class FormularioComponent {
  
   formulario: FormGroup;
-  documento: Documento;
+  documento: Documento = {
+    referencia: null,
+    descripcion: null,
+    observacion: null,
+    cite: null,
+    tipo: null,
+    categoria: null,
+    documento: null,
+    usu_cre: null,
+    estado: null,
+    id_documentos: null,
+    id_personas: null,
+  };
+  tipoDocumento: any;
 
-  constructor(private fb: FormBuilder,private correspondenciaService: CorrespondenciaService) {
+  constructor(private fb: FormBuilder,private correspondenciaService: CorrespondenciaService, private appService: AppService) {
     this.formulario = this.fb.group({
       referencia: ['', Validators.required],
       descripcion: ['', Validators.required],
       observacion: [''],
       cite: ['', Validators.required],
       categoria: ['', Validators.required],
+      tipoDocumento: ['', Validators.required],
     });
 
-    this.documento = {
-      referencia: '',
-      descripcion: '',
-      observacion: '',
-      cite: '',
-      nombreRemitente: 'HUASCAR ANDREUS VEGA QUIROGA',
-      cargoRemitente: 'RECEPCIONISTA',
-      dependencia: 'SUB ALCALDÍA DISTRITO MUNICIPAL-6',
-      contacto: '70146214',
-      categoria: '',
-      documento: 'CORRESPONDENCIA',
+    // this.documento = {
+    //   referencia: '',
+    //   descripcion: '',
+    //   observacion: '',
+    //   cite: '',
+    //   nombreRemitente: 'HUASCAR ANDREUS VEGA QUIROGA',
+    //   cargoRemitente: 'RECEPCIONISTA',
+    //   dependencia: 'SUB ALCALDÍA DISTRITO MUNICIPAL-6',
+    //   contacto: '70146214',
+    //   categoria: '',
+    //   documento: 'CORRESPONDENCIA',
     
-    };
+    // };
   }
 
   ngOnInit(): void {}
@@ -62,14 +78,23 @@ export class FormularioComponent {
     console.log('=================================');
     // debugger
     if (this.formulario.valid) {
+      debugger
+      let da =  this.appService.userData.id_personas;
+      this.documento.id_personas =this.appService.userData.id_personas;
       this.documento.referencia = this.formulario.get('referencia')?.value;
       this.documento.descripcion = this.formulario.get('descripcion')?.value;
       this.documento.observacion = this.formulario.get('observacion')?.value;
       this.documento.cite = this.formulario.get('cite')?.value;
       this.documento.categoria = this.formulario.get('categoria')?.value;
-      console.log('Datos del documento:', this.documento);
+      this.documento.tipo =this.formulario.get('tipoDocumento')?.value;
+      this.documento.estado ="CREADO";
+      //TODO CHANGE
+      this.documento.usu_cre=this.appService.userData.apellidos;
       let  res :ResponseI = await this.correspondenciaService.sendCorrespondencia(this.documento);
-      debugger
+      console.log('=================================');
+      console.log(JSON.stringify(res, null, 2));
+      console.log('=================================');
+      
       this.mostrarConfirmacion();
     } else {
       this.mostrarError();
@@ -84,7 +109,7 @@ export class FormularioComponent {
       icon: 'success',
       confirmButtonText: 'Cerrar',
     });
-    this.formulario.reset();
+    // this.formulario.reset();
   }
 
   mostrarError() {

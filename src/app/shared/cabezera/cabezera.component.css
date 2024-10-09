@@ -1,0 +1,10 @@
+.dropdown-menu-custom {
+    width: 200px; /* Ajusta el ancho del menú */
+    max-height: 150px; /* Ajusta la altura máxima del menú */
+    overflow-y: auto; /* Agrega barra de desplazamiento si el contenido excede la altura */
+    background-color: #0e2238; /* Fondo del menú */
+    border-radius: 0.5rem; /* Borde redondeado */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Sombra */
+    cursor: pointer; /* Apunta al elemento */
+    
+  }

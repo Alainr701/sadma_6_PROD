@@ -10,8 +10,8 @@ export class CorrespondenciaService {
    httpA:string = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
   
-  async sendCorrespondencia(body:any) : Promise<ResponseI>{
-      return await lastValueFrom(this.http.post <ResponseI>(`${this.httpA}/correspondencias`, body));
+  async sendCorrespondencia(body:any ) : Promise<ResponseI>{
+      return await lastValueFrom(this.http.post <ResponseI>(`${this.httpA}/correspondencias_guardar`, body));
   }
 
 
