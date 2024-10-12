@@ -13,6 +13,8 @@ export class CorrespondenciaService {
   async sendCorrespondencia(body:any ) : Promise<ResponseI>{
       return await lastValueFrom(this.http.post <ResponseI>(`${this.httpA}/correspondencias_guardar`, body));
   }
-
-
+  // http://localhost:3000/correspondencias_sabeDoc
+  async sendSabeDoc(body:any ) : Promise<ResponseI>{
+      return await lastValueFrom(this.http.post <ResponseI>(`${this.httpA}/correspondencias_sabeDoc`, body));
+  }
 }
