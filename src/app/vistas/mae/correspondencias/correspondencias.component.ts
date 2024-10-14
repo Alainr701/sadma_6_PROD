@@ -5,6 +5,8 @@ import { MatSort, Sort } from '@angular/material/sort';
 
 declare var bootstrap: any; 
 import {MatTableDataSource} from '@angular/material/table';
+import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
+import { AppService } from 'src/app/servicios/app.service';
 
 interface Remitente{
   id: number;
@@ -30,6 +32,24 @@ interface Correspondence {
   showDetails?: boolean;
   isCollapsed?: boolean;
 }
+interface Correspondences
+{
+  id_hoja_de_ruta:any;
+  codigo_interno:any;
+  cite:any;
+  referencia:any;
+  observacion:any;
+  descripcion:any;
+  tipoDocumento:any;
+  categoria:any;
+  estado:any;
+  fec_cre:any;
+  fec_mod:any;
+  usu_cre:any;
+  usu_mod:any;
+  id_personas:any;
+  
+}
 
 
 @Component({
@@ -38,9 +58,14 @@ interface Correspondence {
   styleUrls: ['./correspondencias.component.css']
 })
 export class CorrespondenciasComponent {
+
+  
  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  constructor( private serviceCorrespondencia: CorrespondenciaService,private appService: AppService) {
+  }
+
   openModal() {
     // Obtener la instancia del modal y mostrarlo
     const modal = new bootstrap.Modal(document.getElementById('nuevaCorrespondenciaModal')!);
@@ -59,24 +84,25 @@ export class CorrespondenciasComponent {
         categoria: 'Urgente.',
         descripcion: 'La carpeta no llegó en físico, favor verificar.',
         
-        remitente: [
-          {
-            id: 1,
-            r: 'Aldo Yañez',
-            dependencia: 'Unidad de Infraestructura Pública',
-            cargo: 'Jefe de Unidad',
-            numero: '78975151',
-          }
-        ]
+      
       },
       showDetails: false,
       isCollapsed: true
     },
     // Puedes añadir más elementos aquí si lo necesitas
   ];
+  correspondencias: Correspondences[] = []
 
-  ngOnInit(): void {
-    // Inicialización si es necesaria
+
+  async ngOnInit() {
+    let body= {
+      // "id_personas":this.appService.userData.id_personas,
+      "id_personas":1,
+      "estado":"CREADO"
+    }
+    let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
+    this.correspondencias = res.data;
+   
   }
 
   toggleDetails(correspondence: Correspondence): void {
@@ -115,6 +141,6 @@ export class CorrespondenciasComponent {
 
   selectedCorrespondence: Correspondence | null = null;
 
-  constructor() {}
+  
 }
 

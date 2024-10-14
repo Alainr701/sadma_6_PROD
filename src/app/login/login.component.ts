@@ -37,7 +37,7 @@ export class LoginComponent {
       (response) => {
         console.log('Login exitoso:', response);
         if (response.status) {
-          debugger
+           
           sessionStorage.setItem('userData', JSON.stringify(response.data));
           this.appService.userData = sessionStorage.getItem('userData') as SUserData;
           console.log('User data:', this.appService.userData);
