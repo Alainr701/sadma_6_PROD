@@ -76,8 +76,9 @@ export class FormularioComponent {
     console.log(JSON.stringify(this.formulario.value, null, 2));
     console.log(`${this.formulario}`);
     console.log('=================================');
-    // debugger
+    //  
     if (this.formulario.valid) {
+       
       let da =  this.appService.userData.id_personas;
       this.documento.id_personas =this.appService.userData.id_personas;
       this.documento.referencia = this.formulario.get('referencia')?.value;
@@ -89,25 +90,30 @@ export class FormularioComponent {
       this.documento.estado ="CREADO";
       //TODO CHANGE
       this.documento.usu_cre=this.appService.userData.apellidos;
-
+      console.log('=================================');
+      console.log(JSON.stringify(this.documento, null, 2));
+      console.log('=================================');
       let  res :ResponseI = await this.correspondenciaService.sendCorrespondencia(this.documento);
       console.log('=================================');
       console.log(JSON.stringify(res, null, 2));
       console.log('=================================');
-      let saveDocumento = await this.correspondenciaService.sendSabeDoc(
-        {
-          id_hoja_de_ruta:res.data,
-          doc64: this.documento.documento,
-          tipo_documento:'NUEVO'
-        }
-        );
-      if(saveDocumento.status ){
-        this.mostrarConfirmacion();
-        //cerrar modals
-        this.formulario.reset();
-      }else{
-        this.mostrarError();
+      if (!res.status) {
+        this.mostrarErrorMensaje('No se pudo crear la hoja de ruta');
+        return;
       }
+      let body = {
+        "id_hoja_de_ruta": res.data,
+        "doc64": this.documento.documento,
+        "tipo_documento": "pdf"
+      }
+
+      let res2: ResponseI = await this.correspondenciaService.
+      crearDocumento(body);
+      if (!res2.status) { 
+        this.mostrarErrorMensaje('No se pudo guardar el documento');
+        return;
+      }
+      this.mostrarConfirmacion();
     } else {
       this.mostrarError();
     }
@@ -128,6 +134,14 @@ export class FormularioComponent {
     Swal.fire({
       title: 'Error',
       text: 'Por favor, completa todos los campos requeridos correctamente.',
+      icon: 'error',
+      confirmButtonText: 'Cerrar',
+    });
+  }
+  mostrarErrorMensaje(msg: string) {
+    Swal.fire({
+      title: 'Error',
+      text: msg,
       icon: 'error',
       confirmButtonText: 'Cerrar',
     });
