@@ -24,6 +24,8 @@ import { InitComponent } from './vistas/mae/init/init.component';
 import { HojaRutaComponent } from './vistas/mae/hoja-ruta/hoja-ruta.component';
 import { CorrespondenciasComponent } from './vistas/mae/correspondencias/correspondencias.component';
 import { FormularioComponent } from './vistas/mae/correspondencias/formulario/formulario.component';
+import { FormDerivacionComponent } from './shared/form-derivacion/form-derivacion.component';
+import { DomSanitizerCreacionSolicitudesPipe } from './dom-sanitizer-creacion-solicitudes.pipe';
 
 
 
@@ -44,7 +46,9 @@ import { FormularioComponent } from './vistas/mae/correspondencias/formulario/fo
     InitComponent,
     HojaRutaComponent,
     CorrespondenciasComponent,
-    FormularioComponent
+    FormularioComponent,
+    FormDerivacionComponent,
+    DomSanitizerCreacionSolicitudesPipe
     
   ],
   imports: [

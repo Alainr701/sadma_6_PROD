@@ -7,31 +7,17 @@ declare var bootstrap: any;
 import {MatTableDataSource} from '@angular/material/table';
 import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
 import { AppService } from 'src/app/servicios/app.service';
+import { FormDerivacionComponent } from 'src/app/shared/form-derivacion/form-derivacion.component';
+import { ResponseI } from 'src/app/interfaces/response';
 
-interface Remitente{
-  id: number;
-  r: string;
-  dependencia:string;
-  cargo:string;
-  numero: string;
-}
-interface Correspondence {
-  id: number;
-  codigo: string;
-  
-  
-  detalles: {
-    cite: string;
-    tipo_documento: string;
-    observacion: string;
-    referencia: string;
-    categoria: string;
-    descripcion: string;
-    remitente?: Remitente[];
-  };
-  showDetails?: boolean;
-  isCollapsed?: boolean;
-}
+// interface Remitente{
+//   id: number;
+//   r: string;
+//   dependencia:string;
+//   cargo:string;
+//   numero: string;
+// }
+
 interface Correspondences
 {
   id_hoja_de_ruta:any;
@@ -48,7 +34,8 @@ interface Correspondences
   usu_cre:any;
   usu_mod:any;
   id_personas:any;
-  
+  showDetails?: boolean;
+  isCollapsed?: boolean;
 }
 
 
@@ -65,55 +52,32 @@ export class CorrespondenciasComponent {
   @ViewChild(MatSort) sort!: MatSort;
   constructor( private serviceCorrespondencia: CorrespondenciaService,private appService: AppService) {
   }
+  showModalVer:boolean =false;
 
   openModal() {
     // Obtener la instancia del modal y mostrarlo
     const modal = new bootstrap.Modal(document.getElementById('nuevaCorrespondenciaModal')!);
     modal.show();
   }
-  correspondences: Correspondence[] = [
-    {
-      id: 1,
-      codigo: 'SADM6-0096-2024',
-      
-      detalles: {
-        cite: 'GAMEA-67570-2024',
-        tipo_documento: 'linea nivel',
-        observacion: 'Para su atención y fines consiguientes.',
-        referencia: 'Para su atención y fines consiguientes.',
-        categoria: 'Urgente.',
-        descripcion: 'La carpeta no llegó en físico, favor verificar.',
-        
-      
-      },
-      showDetails: false,
-      isCollapsed: true
-    },
-    // Puedes añadir más elementos aquí si lo necesitas
-  ];
-  correspondencias: Correspondences[] = []
-
-
+  correspondencias: Correspondences[] = [];
   async ngOnInit() {
     let body= {
-      // "id_personas":this.appService.userData.id_personas,
-      "id_personas":1,
+      "id_personas":this.appService.userData.id_personas,
       "estado":"CREADO"
     }
     let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
     this.correspondencias = res.data;
-   
   }
 
-  toggleDetails(correspondence: Correspondence): void {
+  toggleDetails(correspondence: Correspondences): void {
     correspondence.showDetails = !correspondence.showDetails;
   }
 
-  toggleCollapse(correspondence: Correspondence): void {
+  toggleCollapse(correspondence: Correspondences): void {
     correspondence.isCollapsed = !correspondence.isCollapsed;
   }
 
-  rechazar(correspondence: Correspondence): void {
+  rechazar(correspondence: Correspondences): void {
     Swal.fire({
       title: 'Motivo de Rechazo',
       input: 'textarea',
@@ -139,8 +103,31 @@ export class CorrespondenciasComponent {
     });
   }
 
-  selectedCorrespondence: Correspondence | null = null;
+  @ViewChild(FormDerivacionComponent) formDeriva!: FormDerivacionComponent;
+  derivar(correspondence: Correspondences) {
+    this.showModalVer=true;
+    this.serviceCorrespondencia.derivarCorrespondence= correspondence;
+    this.formDeriva.openModal();
+    // if (this.formDeriva) { 
+    // } else {
+    //   console.error('El componente formDeriva no está inicializado.');
+    // }
+  }
+  pdfSrc: string = ''; // Esta será la ruta o base64 del PDF que quieres mostrar
 
+  async openPdfModal(correspondence: Correspondences) {
+    let res: ResponseI = await this.serviceCorrespondencia.obtenerDoc({
+      "id_hoja_de_ruta": correspondence.id_hoja_de_ruta
+    });
+  
+    this.pdfSrc = res.data.doc64;  // Asignar el documento al embed
+  
+    const modalElement = document.getElementById('pdfModal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);  // Inicializar el modal
+      modal.show();  // Mostrar el modal
+    }
+  }
   
 }
 

@@ -7,6 +7,10 @@ import { lastValueFrom } from 'rxjs';
   providedIn: 'root'
 })
 export class CorrespondenciaService {
+
+  derivarCorrespondence:any;
+
+
    httpA:string = 'http://localhost:3000';
   constructor(private http: HttpClient) { }
   
@@ -19,6 +23,17 @@ export class CorrespondenciaService {
   }
   async obtenerCorrespondencia(body:any) : Promise<ResponseI>{
     return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/obtenerCorrespondencia` ,body));
+  }
+  async  obtenerPersonasUnidad() : Promise<ResponseI>{
+    return lastValueFrom(this.http.get<ResponseI>(`${this.httpA}/obtenerPersonasUnidad` ));
+  }
+  //derivaciones 
+  async crearDerivacion(body:any){
+    return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/crearDerivacion`,body));
+  }
+  //http://localhost:3000/obtenerDoc
+  async  obtenerDoc(body:any) : Promise<ResponseI>{
+    return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/obtenerDoc`, body));
   }
   
 }

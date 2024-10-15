@@ -39,7 +39,7 @@ export class LoginComponent {
         if (response.status) {
            
           sessionStorage.setItem('userData', JSON.stringify(response.data));
-          this.appService.userData = sessionStorage.getItem('userData') as SUserData;
+          this.appService.userData = JSON.parse(sessionStorage.getItem('userData')!) as SUserData;
           console.log('User data:', this.appService.userData);
           
 

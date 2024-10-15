@@ -30,10 +30,16 @@ export class CabezeraComponent implements OnInit {
   toggleMenu() {
     this.showMenu = !this.showMenu;
   }
-  
-  ngOnInit(): void {
+  userData:SUserData={} ;
+   ngOnInit(): void {
     if (sessionStorage.getItem('userData')) {
-      this.appService.userData = sessionStorage.getItem('userData') as SUserData;
+      this.appService.userData = JSON.parse(sessionStorage.getItem('userData')!) as SUserData ;
+      let d = this.appService.userData;
+      console.log('=================================');
+      console.log(JSON.stringify(d.nombres, null, 2));
+      console.log('=================================');
+  
+      this.userData = this.appService.userData;
     }else{
       this.router.navigate(['login']);
     }
