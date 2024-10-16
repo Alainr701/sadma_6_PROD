@@ -72,6 +72,8 @@ export class FormularioComponent {
   ngOnInit(): void {}
 
   async onSubmit() {
+    try {
+      
     console.log('=================================');
     console.log(JSON.stringify(this.formulario.value, null, 2));
     console.log(`${this.formulario}`);
@@ -113,10 +115,33 @@ export class FormularioComponent {
         this.mostrarErrorMensaje('No se pudo guardar el documento');
         return;
       }
+      debugger
+      let res3: ResponseI = await this.correspondenciaService.
+      guardarDerivacionHojaDeRuta({ // esto guarda en el historial de derivaciones
+        "id_personas": this.appService.userData.id_personas,
+        "id_hoja_de_ruta": res.data,
+        "observacion": '',
+        "plazo_dias": null,
+        "proveido": '',
+        "estado": 'CREADO',
+        "id_proveido_personas": this.appService.userData.id_personas,
+        "usu_mod": "alain.espino",
+      })
+      if (!res3.status) {
+       Swal.fire('Error', 'No se pudo crear la derivación', 'error');
+        return;
+      }
       this.mostrarConfirmacion();
     } else {
       this.mostrarError();
     }
+  } catch (error) {
+    console.log('=================================');
+    console.log(JSON.stringify(error, null, 2));
+    console.log(`${error}`);
+    console.log('=================================');
+      
+  }
   }
   
 

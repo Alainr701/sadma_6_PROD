@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseI } from '../interfaces/response';
-import { lastValueFrom } from 'rxjs';
+import { async, lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +34,9 @@ export class CorrespondenciaService {
   //http://localhost:3000/obtenerDoc
   async  obtenerDoc(body:any) : Promise<ResponseI>{
     return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/obtenerDoc`, body));
+  }
+  async  guardarDerivacionHojaDeRuta(body:any) : Promise<ResponseI>{
+    return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/guardarDerivacionHojaDeRuta`, body));
   }
   
 }
