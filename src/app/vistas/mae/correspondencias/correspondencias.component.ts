@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
@@ -6,19 +6,13 @@ import { MatSort, Sort } from '@angular/material/sort';
 declare var bootstrap: any; 
 import {MatTableDataSource} from '@angular/material/table';
 import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
-import { AppService } from 'src/app/servicios/app.service';
+import { AppService, SPersonas } from 'src/app/servicios/app.service';
 import { FormDerivacionComponent } from 'src/app/shared/form-derivacion/form-derivacion.component';
 import { ResponseI } from 'src/app/interfaces/response';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Documento } from './formulario/formulario.component';
 
-// interface Remitente{
-//   id: number;
-//   r: string;
-//   dependencia:string;
-//   cargo:string;
-//   numero: string;
-// }
-
-interface Correspondences
+export interface Correspondences
 {
   id_hoja_de_ruta:any;
   codigo_interno:any;
@@ -34,8 +28,22 @@ interface Correspondences
   usu_cre:any;
   usu_mod:any;
   id_personas:any;
+  id_proveido_personas:any;
   showDetails?: boolean;
   isCollapsed?: boolean;
+  historial?: HistorialDerivaciones;
+}
+export interface HistorialDerivaciones{
+  id_historial_derivaciones?: number;
+  id_personas: number;
+  id_hoja_de_ruta: number;
+  fecha_derivacion: Date;
+  obs: string;
+  fec_cre: Date;
+  plazo_dias: number;
+  proveido: string;
+  estado: string;
+  id_proveido_personas: number;
 }
 
 
@@ -50,12 +58,32 @@ export class CorrespondenciasComponent {
  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor( private serviceCorrespondencia: CorrespondenciaService,private appService: AppService) {
+  constructor( private serviceCorrespondencia: CorrespondenciaService,private appService: AppService, private modalService: NgbModal) {
   }
   showModalVer:boolean =false;
+  doc:Documento|null = null;
 
-  openModal() {
-    // Obtener la instancia del modal y mostrarlo
+  isOpenModal = false;
+  openModal(correspondence: Correspondences|null) {
+    this.isOpenModal = true;
+    if (correspondence!=null) {
+    this.doc = {
+      referencia : correspondence.referencia,
+      descripcion : correspondence.descripcion,
+      observacion :  correspondence.observacion,
+      cite : correspondence.cite,
+      //TODO : REVISAR
+      tipo :   '',
+      categoria : correspondence.categoria,
+      documento : '',
+      usu_cre : correspondence.usu_cre,
+      estado : correspondence.estado,
+      id_documentos : '',
+      id_personas : correspondence.id_personas,
+    }
+  }
+  
+
     const modal = new bootstrap.Modal(document.getElementById('nuevaCorrespondenciaModal')!);
     modal.show();
   }
@@ -104,30 +132,68 @@ export class CorrespondenciasComponent {
   }
 
   @ViewChild(FormDerivacionComponent) formDeriva!: FormDerivacionComponent;
-  derivar(correspondence: Correspondences) {
+
+  async derivar(correspondence: Correspondences) {
     this.showModalVer=true;
+    //TODO REVISAR
+    correspondence.usu_mod=null;
     this.serviceCorrespondencia.derivarCorrespondence= correspondence;
-    this.formDeriva.openModal();
+    await this.formDeriva.openModal();
+    // this.formDeriva.closeModal();
+    // let body= {
+    //   "id_personas":this.appService.userData.id_personas,
+    //   "estado":"CREADO"
+    // }
+    // let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
+    // this.correspondencias = res.data;
     // if (this.formDeriva) { 
     // } else {
     //   console.error('El componente formDeriva no está inicializado.');
+   
     // }
   }
-  pdfSrc: string = ''; // Esta será la ruta o base64 del PDF que quieres mostrar
+  selectedPersona: SPersonas | null= null;
 
-  async openPdfModal(correspondence: Correspondences) {
+  async getRemitente(correspondence: Correspondences){
+    let body = {
+      id_personas: correspondence.id_personas,
+    }
+    let res = await this.serviceCorrespondencia.buscarPersona(body);
+    this.selectedPersona = res.data[0];
+  }
+  
+  pdfSrc = ''; // Asegúrate de tener el valor de `pdfSrc` que deseas mostrar.
+  @ViewChild('pdfModal') pdfModal: any;
+
+  async openPdfModal(correspondence: any) {
+    
     let res: ResponseI = await this.serviceCorrespondencia.obtenerDoc({
       "id_hoja_de_ruta": correspondence.id_hoja_de_ruta
     });
-  
-    this.pdfSrc = res.data.doc64;  // Asignar el documento al embed
-  
-    const modalElement = document.getElementById('pdfModal');
-    if (modalElement) {
-      const modal = new bootstrap.Modal(modalElement);  // Inicializar el modal
-      modal.show();  // Mostrar el modal
-    }
+    this.pdfSrc = res.data.doc64; 
+    this.modalService.open(this.pdfModal, { size: 'lg', backdrop: 'static' });
   }
   
+  descargar(pdfSrc: any) {
+    const link = document.createElement('a');
+    link.href = pdfSrc;
+    link.download = 'documento.pdf';
+    link.click();
+}
+async handleClose() {
+  console.log('Evento close recibido desde el componente hijo');
+  if (this.formDeriva) {
+    this.formDeriva!.cerrarModal!();
+    let body= {
+      "id_personas":this.appService.userData.id_personas,
+      "estado":"CREADO"
+    }
+    let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
+    this.correspondencias = res.data;
+  } else {
+    console.error('El componente formDeriva no está inicializado.');
+  }
+  // Puedes realizar aquí cualquier otra acción que necesites al cerrar el formulario
+}
 }
 

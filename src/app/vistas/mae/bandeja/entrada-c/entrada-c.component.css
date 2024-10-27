@@ -411,3 +411,12 @@ body {
 		background: #f1f1f1;
 	}
 }
+
+.backgroud-cards{
+    padding: 20px;
+    margin: 20px;
+    box-shadow:  5px 5px 10px #292929;
+    border-radius: 10px;
+;  
+    
+  }

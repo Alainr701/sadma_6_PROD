@@ -1,5 +1,8 @@
-<div>
+<div class="container m-4">
    
+    <!-- Botón para regresar a la vista principal -->
+    <button class="btn btn-primary" (click)="volver()">Volver a la Bandeja Principal</button>
+
 
     <div class="container mt-4">
       <div class="table-responsive">
@@ -16,31 +19,29 @@
             </tr>
           </thead>
           <tbody>
-            <ng-container *ngFor="let correspondence of correspondences">
+            <ng-container *ngFor="let correspondence of listaHistarial">
               <tr>
                 <td class="d-block d-md-table-cell text-wrap text-break">
-                  {{ correspondence.codigo }}
+                  {{ correspondence.codigo_interno }}
                 </td>
-                
                 <td class="d-block d-md-table-cell text-wrap text-break">
                   {{ correspondence.referencia}}
                 </td>
-
                 <td class="d-block d-md-table-cell">
-                    <button type="button" class="btn btn-info" (click)="remitente(correspondence)">
-                        <i class="bi bi-person-circle"></i> Remitente
+                    <button type="button" class="btn btn-info" (click)="remitente(correspondence.id_proveido_personas)">
+                        <i class="bi bi-person-circle"></i> Derivado por
                       </button>
                 </td>
                 <td class="d-block d-md-table-cell">
-                    <button type="button" class="btn btn-info" (click)="remisor(correspondence)">
-                        <i class="bi bi-person-circle"></i> Remitente
+                    <button type="button" class="btn btn-info" (click)="remisor(correspondence.id_personas)">
+                        <i class="bi bi-person-circle"></i> Aceptado por
                       </button>
                 </td>
                 <td class="d-block d-md-table-cell text-wrap text-break">
-                  <span class="badge bg-warning">{{ correspondence.fechaAceptacion}}</span>
+                  <span class="badge bg-warning">{{ correspondence.fecha_respuesta | date : 'dd/MM/yyyy HH:mm'}}</span>
                 </td>
                 <td class="d-block d-md-table-cell">
-                    <button class="btn btn-outline-primary" (click)="showHistorial(correspondence)">
+                    <button class="btn btn-outline-primary" (click)="showHistorial(correspondence.id_historial_derivaciones)">
                       <i class="bi bi-file-earmark-text">Ver Historial</i>
                     </button>
                   </td>
@@ -54,34 +55,34 @@
                 <tr class="text-start">
                     <th scope="row">Proveido</th>
                     <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
-                      {{ correspondence.detalles.proveido }}
+                      {{ correspondence.proveido }}
                     </td>
                   </tr>
                   <tr class="text-start">
                     <th scope="row">Accion</th>
-                    <td colspan="7">{{ correspondence.detalles.accion }}</td>
+                    <td colspan="7">{{ correspondence.estado }}</td>
                   </tr>
                   <tr class="text-start">
                     <th scope="row">descripcion</th>
                     <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
-                      {{ correspondence.detalles.descripcion}}
+                      {{ correspondence.descripcion}}
                     </td>
                   </tr>
                   <tr class="text-start">
                     <th scope="row">Observacion</th>
                     <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
-                      {{ correspondence.detalles.observacion }}
+                      {{ correspondence.obs }}
                     </td>
                   </tr>
                   <tr class="text-start">
                   <th scope="row">cite</th>
-                  <td colspan="7">{{ correspondence.detalles.cite }}</td>
+                  <td colspan="7">{{ correspondence.cite }}</td>
                    </tr>
                 
                  <tr class="text-start">
                   <th scope="row">Archivo</th>
                   <td colspan="7" class="d-block d-md-table-cell text-wrap text-break">
-                    {{ correspondence.detalles.archivo}}
+                    {{ correspondence.id_documento_save}}
                   </td>
                 </tr>
               </ng-container>
@@ -93,7 +94,7 @@
     
     <!-- Historial Modal -->
     <!-- Historial Modal -->
-    <div class="modal fade" id="historialModal" tabindex="-1" aria-labelledby="historialModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="historialModal" tabindex="-1" aria-labelledby="historialModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
@@ -138,14 +139,12 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     
     
    
     
     
     
-    <!-- Botón para regresar a la vista principal -->
-    <button class="btn btn-primary" (click)="volver()">Volver a la Bandeja Principal</button>
   </div>
   

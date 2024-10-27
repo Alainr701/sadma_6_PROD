@@ -7,7 +7,8 @@
                   <!-- Cuerpo de la tarjeta -->
                   <div class="card-body">  
                     <span>TOTAL CORRESPONDENCIA ACEPTADA</span>
-                    <span class="total-number">150</span>
+                    <span class="total-number">{{
+                    totales?.aceptado}}</span>
                     <span class="icon">
                         <i class="fas fa-envelope"></i>
                     </span>
@@ -15,7 +16,7 @@
 
                   <!-- Botón transparente en la parte inferior -->
                   <div class="card-footer">
-                      <button (click)="verMasInformacion(1)" class="btn btn-transparent">Más Información</button>
+                      <button (click)="verMasInformacion('ACEPTADO')" class="btn btn-transparent">Más Información</button>
                   </div>
               </div>
           </div>
@@ -25,13 +26,13 @@
                    <!-- Cuerpo de la tarjeta -->
                    <div class="card-body">
                     <span>TOTAL CORRESPONDENCIA REMITIDA</span>
-                    <span class="total-number">200</span>
+                    <span class="total-number">{{totales?.remitido}}</span>
                     <span class="icon">
                         <i class="fas fa-envelope"></i>
                     </span>
                   </div>
                   <div class="card-footer">
-                      <button (click)="verMasInformacion(2)" class="btn btn-transparent">Más Información</button>
+                      <button (click)="verMasInformacion('REMITIDO')" class="btn btn-transparent">Más Información</button>
                   </div>
               </div>
           </div>
@@ -40,13 +41,13 @@
                   <!-- Cuerpo de la tarjeta -->
                   <div class="card-body">
                     <span>TOTAL CORRESPONDENCIA CONCLUIDA</span>
-                    <span class="total-number">500</span>
+                    <span class="total-number">{{totales?.concluido}}</span>
                     <span class="icon">
                         <i class="fas fa-envelope"></i>
                     </span>
                   </div>
                   <div class="card-footer">
-                      <button (click)="verMasInformacion(3)" class="btn btn-transparent">Más Información</button>
+                      <button (click)="verMasInformacion('CONCLUIDO')" class="btn btn-transparent">Más Información</button>
                   </div>
               </div>
           </div>
@@ -65,7 +66,7 @@
                     </span>
                   </div>
                   <div class="card-footer">
-                      <button (click)="verMasInformacion(4)" class="btn btn-transparent">Más Información</button>
+                      <button (click)="verMasInformacion('DESTIEMPO')" class="btn btn-transparent">Más Información</button>
                   </div>
               </div>
           </div>
@@ -74,13 +75,13 @@
                    <!-- Cuerpo de la tarjeta -->
                    <div class="card-body">
                     <span>TOTAL CORRESPONDENCIA GAMEA</span>
-                    <span class="total-number">21</span>
+                    <span class="total-number">{{totales?.concluido_gamea}}</span>
                     <span class="icon">
                         <i class="fas fa-envelope"></i>
                     </span>
                   </div>
                   <div class="card-footer">
-                      <button (click)="verMasInformacion(5)" class="btn btn-transparent">Más Información</button>
+                      <button (click)="verMasInformacion('CONCLUIDO_GAMEA')" class="btn btn-transparent">Más Información</button>
                   </div>
               </div>
           </div>
@@ -89,13 +90,13 @@
                    <!-- Cuerpo de la tarjeta -->
                   <div class="card-body">
                     <span>TOTAL CORRESPONDENCIA DERIVADAS</span>
-                    <span class="total-number">36</span>
+                    <span class="total-number">{{totales?.derivado}}</span>
                     <span class="icon">
                         <i class="fas fa-envelope"></i>
                     </span>
                   </div>
                   <div class="card-footer">
-                      <button (click)="verMasInformacion(6)" class="btn btn-transparent">Más Información</button>
+                      <button (click)="verMasInformacion('DERIVADO')" class="btn btn-transparent">Más Información</button>
                   </div>
               </div>
           </div>

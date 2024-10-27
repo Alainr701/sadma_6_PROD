@@ -37,4 +37,6 @@ export interface SPersonas {
   id_cargos?: any;
   id_unidad?: any;
   nombre?:any;//nombre unidad
+  celular:any;//celular
+  cargo:any;//cargo
 }

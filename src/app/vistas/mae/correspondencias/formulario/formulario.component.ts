@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ResponseI } from 'src/app/interfaces/response';
 import { AppService } from 'src/app/servicios/app.service';
 import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
 import { FileUtils } from 'src/app/utils/file-utils';
 import Swal from 'sweetalert2';
 
-interface Documento {
+export interface Documento {
     referencia: any;
     descripcion: any;
     observacion: any;
@@ -27,8 +28,21 @@ interface Documento {
   styleUrls: ['./formulario.component.css']
 })
 export class FormularioComponent {
+  @Input() doc: Documento|null = null;
+  @Output() close = new EventEmitter<void>();
+
+  onClose() {
+    this.close.emit();
+  }
  
   formulario: FormGroup;
+
+  ngOnInit(): void {
+    if (this.doc != null) {
+      
+      this.documento = this.doc;
+    }
+  }
   documento: Documento = {
     referencia: null,
     descripcion: null,
@@ -44,7 +58,7 @@ export class FormularioComponent {
   };
   tipoDocumento: any;
 
-  constructor(private fb: FormBuilder,private correspondenciaService: CorrespondenciaService, private appService: AppService) {
+  constructor(private fb: FormBuilder,private correspondenciaService: CorrespondenciaService, private appService: AppService,private router: Router) {
     this.formulario = this.fb.group({
       referencia: ['', Validators.required],
       descripcion: ['', Validators.required],
@@ -69,7 +83,7 @@ export class FormularioComponent {
     // };
   }
 
-  ngOnInit(): void {}
+
 
   async onSubmit() {
     try {
@@ -115,7 +129,6 @@ export class FormularioComponent {
         this.mostrarErrorMensaje('No se pudo guardar el documento');
         return;
       }
-      debugger
       let res3: ResponseI = await this.correspondenciaService.
       guardarDerivacionHojaDeRuta({ // esto guarda en el historial de derivaciones
         "id_personas": this.appService.userData.id_personas,
@@ -126,12 +139,15 @@ export class FormularioComponent {
         "estado": 'CREADO',
         "id_proveido_personas": this.appService.userData.id_personas,
         "usu_mod": "alain.espino",
+        "id_documento_save":  res2.data
+
       })
       if (!res3.status) {
        Swal.fire('Error', 'No se pudo crear la derivación', 'error');
         return;
       }
       this.mostrarConfirmacion();
+      this.onClose();
     } else {
       this.mostrarError();
     }

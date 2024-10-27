@@ -1,0 +1,99 @@
+<div class="app">
+    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+      <div class="card text-center transparent-bg" style="width: 100%; max-width: 600px;">
+        <div class="card-body" style="background-color: rgba(255, 251, 251, 0.1);">
+          <h5 class="mb-3">Introduzca el código de la Hoja de Ruta</h5>
+  
+          <div class="row justify-content-center mb-3">
+            <div class="col-12 col-md-auto mb-2">
+              <button class="btn btn-secondary btn-block">SADM6</button>
+            </div>
+            <div class="col-6 col-md-3 mb-2">
+              <input type="number" class="form-control text-center" placeholder="Ej. 252" [(ngModel)]="codigoHojaRuta">
+            </div>
+            <div class="col-6 col-md-3 mb-2">
+              <select class="form-control" [(ngModel)]="anioSeleccionado">
+                <option *ngFor="let anio of anios" [value]="anio">{{ anio }}</option>
+              </select>
+            </div>
+          </div>
+  
+          <button type="button" class="btn btn-primary btn-lg btn-block mb-3" data-bs-toggle="modal" data-bs-target="#ubicacionActualModal" (click)="searchApp()">
+           BUSCAR
+          </button>
+
+        
+  
+          <div class="row">
+            <!-- Botones numéricos -->
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">7</button></div>
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">8</button></div>
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">9</button></div>
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">4</button></div>
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">5</button></div>
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">6</button></div>
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">1</button></div>
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">2</button></div>
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">3</button></div>
+            <div class="col-4 col-sm-4 mb-2"><button class="btn btn-dark keypad-btn">0</button></div>
+            <div class="col-8 col-sm-8 mb-2"><button class="btn btn-dark keypad-btn">Borrar</button></div>
+          </div>
+  
+          <div class="mt-4">
+            <div class="time-display">{{ currentTime | date: 'HH:mm' }}</div>
+            <div class="date-display">{{ today }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+    <!-- Modal -->
+    <div class="modal fade" id="ubicacionActualModal" tabindex="-1" aria-labelledby="ubicacionActualModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ubicacionActualModalLabel">Ubicacion Actual</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <p>CON EL SERVIDOR PUBLICO: <br>
+                  {{hojaRuta?.nombres}} {{hojaRuta?.apellidos}}
+                </p>
+
+              </div>
+              <div class="col-md-6">
+                <p>REFERENCIA:
+                  <br>
+                  {{hojaRuta?.referencia}}
+                </p>
+             
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p>ESTADO:</p>
+                <p>{{hojaRuta?.estado}}</p>
+              </div>
+             
+              <div class="col-md-6">
+                <p>HISTORIAL HOJA DE RUTA</p>
+                 <button class="btn btn-primary" (click)="showHistorial()">ver detalle</button> 
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-md-12">
+                <p>HUVICACION:</p>
+                <p>{{hojaRuta?.unidad}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

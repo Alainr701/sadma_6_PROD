@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
 import Swal from 'sweetalert2';
+import { Correspondences } from '../../correspondencias/correspondencias.component';
+import { SPersonas } from 'src/app/servicios/app.service';
 
 interface Historial {
   id: number;
@@ -46,6 +49,21 @@ interface C_remitida {
   };
   showDetails?: boolean;
 }
+interface SHistorial {
+  codigo_interno: string; // e.g., "SADM6-80-2024"
+  referencia: string; // e.g., "example"
+  fecha_respuesta: string; // e.g., "0000-00-00 00:00:00"
+  id_historial_derivaciones: number; // e.g., 16
+  proveido: string; // e.g., "Ej: Para su Atencion"
+  estado: string; // e.g., "DERIVADO"
+  obs: string; // e.g., "YUIUY"
+  cite: string; // e.g., "example"
+  id_documento_save: number; // e.g., 0
+  id_personas: number; // e.g., 0
+  id_proveido_personas:number,
+  descripcion: string;
+  showDetails?: boolean;
+}
 
 @Component({
   selector: 'app-detalle1',
@@ -53,130 +71,59 @@ interface C_remitida {
   styleUrls: ['./detalle1.component.css'],
 })
 export class Detalle1Component implements OnInit {
-  id!: number;
+  data: any;
   mensaje!: string; // Variable para almacenar el mensaje según el ID
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  listaHistarial: SHistorial[] = [];
+  constructor(private route: ActivatedRoute, private router: Router, private serviceCorrespondencia: CorrespondenciaService) {}
 
-  ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      const idParam = params.get('id');
-      if (idParam !== null) {
-        this.id = +idParam;
-        console.log('ID recibido:', this.id);
-      } else {
-        console.error('No se recibió un ID válido');
-      }
-    });
+  async ngOnInit() {
+    this.data = history.state
+    let body= {
+      "id_personas": this.data.id_personas,
+      "estado": this.data.estado
+    }
+    let res = await this.serviceCorrespondencia.obtenerHistorialData(body);
+    this.listaHistarial = res.data;
   }
-
   volver() {
     this.router.navigate(['/mae/bandeja-principal']); // Redirige a la bandeja principal sin parámetros
   }
-
   // corespondencia aceptada
-  correspondences: C_aceptada[] = [
-    {
-      id: 1,
-      codigo: 'GAMEA-67570-2024',
-      referencia: 'ORIGINAL',
-      fechaAceptacion: '19-08-2024 09:13:30',
-      detalles: {
-        proveido: 'La carpeta no llegó en físico, favor verificar.',
-        accion: 'Derivada',
-        descripcion: 'fsdjjjjjjknnnnnnnnnnnnnnnnnnnnnnnnnnndsajjjjjjjjjjjjjj', // Descripción adicional
-        observacion: 'Para su atención y fines consiguientes.',
-        cite: 'GAMEA-67570-2024', // Código o cita del documento
-        archivo: 'GAMEA-67570-2024.pdf',
-        historial: [
-          {
-            id: 1,
-            remitente:
-              'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario:
-              'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1',
-          },
-          {
-            id: 2,
-            remitente:
-              'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaDerivacion: '19-08-2024 09:13:30',
-            destinatario: 'Destinatario 2',
-            fechaRecepcion: '19-08-2024 10:30:00',
-            proveido: 'Proveído 2',
-            observacion: 'Observación 2',
-            remision: 'Remisión 2',
-          },
-        ],
-      },
-      showDetails: false,
-    },
-    {
-      id: 1,
-      codigo: 'GAMEA-67570-2024',
-      referencia: 'ORIGINAL',
-      fechaAceptacion: '19-08-2024 09:13:30',
-      detalles: {
-        proveido: 'La carpeta no llegó en físico, favor verificar.',
-        accion: 'Derivada',
-        descripcion: 'fsdjjjjjjknnnnnnnnnnnnnnnnnnnnnnnnnnndsajjjjjjjjjjjjjj', // Descripción adicional
-        observacion: 'Para su atención y fines consiguientes.',
-        cite: 'GAMEA-67570-2024', // Código o cita del documento
-        archivo: 'GAMEA-67570-2024.pdf',
-        historial: [
-          {
-            id: 1,
-            remitente:
-              'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario:
-              'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1',
-          },
-          {
-            id: 2,
-            remitente:
-              'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaDerivacion: '19-08-2024 09:13:30',
-            destinatario: 'Destinatario 2',
-            fechaRecepcion: '19-08-2024 10:30:00',
-            proveido: 'Proveído 2',
-            observacion: 'Observación 2',
-            remision: 'Remisión 2',
-          },
-        ],
-      },
-      showDetails: false,
-    },
-    // Otros objetos Correspondence...
-  ];
+ 
 
-  selectedCorrespondence: C_aceptada | null = null;
+  // selectedCorrespondence: C_aceptada | null = null;
+  selectedPersona: SPersonas | null= null;
 
-  toggleDetails(correspondence: C_aceptada): void {
+  toggleDetails(correspondence: SHistorial): void {
     correspondence.showDetails = !correspondence.showDetails;
   }
-  remitente(correspondence: C_aceptada): void {
-    Swal.fire({
+
+  async getRemitente(id:number){
+    let body = {
+      id_personas: id,
+    }
+    let res = await this.serviceCorrespondencia.buscarPersona(body);
+    this.selectedPersona = res.data[0];
+  }
+
+  async remitente(id: any) {
+    
+     await this.getRemitente(id)
+
+    
+        Swal.fire({
       title: 'Información del Usuario',
       html: `
         <div style="text-align: center; margin-bottom: 15px;">
         <img src="https://unsplash.it/100/100" style="border-radius: 50%;" alt="Imagen del usuario" />
       </div>
       <div style="text-align: center; margin-bottom: 15px;">
-        <h5 style="margin: 0; color: #28a745;">HUASCAR ANDREUS VEGA QUIROGA</h5>
+        <h5 style="margin: 0; color: #28a745;">${this.selectedPersona?.nombres} ${this.selectedPersona?.apellidos}</h5>
         <hr />
-        <p><strong>DEPENDENCIA:</strong> SUB ALCALDIA DISTRITO MUNICIPAL-6</p>
-        <p><strong>CARGO:</strong> RECEPCIONISTA</p>
-        <p><strong>NUMERO CEL:</strong> 78956325</p>
+        <p><strong>DEPENDENCIA:</strong> ${this.selectedPersona?.nombre}</p>
+        <p><strong>CARGO:</strong>${this.selectedPersona?.cargo} </p>
+        <p><strong>NUMERO CEL:</strong>${this.selectedPersona?.celular}</p>
         <hr />
       </div>
       `,
@@ -189,19 +136,20 @@ export class Detalle1Component implements OnInit {
       },
     });
   }
-  remisor(correspondence: C_aceptada): void {
+  async remisor(id: any) {
+    await this.getRemitente(id);
     Swal.fire({
       title: 'Información del Usuario',
       html: `
-        <div style="text-align: center; margin-bottom: 15px;">
+       <div style="text-align: center; margin-bottom: 15px;">
         <img src="https://unsplash.it/100/100" style="border-radius: 50%;" alt="Imagen del usuario" />
       </div>
       <div style="text-align: center; margin-bottom: 15px;">
-        <h5 style="margin: 0; color: #28a745;">HUASCAR ANDREUS VEGA QUIROGA</h5>
+        <h5 style="margin: 0; color: #28a745;">${this.selectedPersona?.nombres} ${this.selectedPersona?.apellidos}</h5>
         <hr />
-        <p><strong>DEPENDENCIA:</strong> SUB ALCALDIA DISTRITO MUNICIPAL-6</p>
-        <p><strong>CARGO:</strong> RECEPCIONISTA</p>
-        <p><strong>NUMERO CEL:</strong> 78956325</p>
+        <p><strong>DEPENDENCIA:</strong> ${this.selectedPersona?.nombre}</p>
+        <p><strong>CARGO:</strong>${this.selectedPersona?.cargo} </p>
+        <p><strong>NUMERO CEL:</strong>${this.selectedPersona?.celular}</p>
         <hr />
       </div>
       `,
@@ -214,8 +162,8 @@ export class Detalle1Component implements OnInit {
       },
     });
   }
-  showHistorial(correspondence: C_aceptada): void {
-    this.selectedCorrespondence = correspondence;
+  showHistorial(correspondence: any): void {
+    this.selectedPersona = correspondence;
     const modalElement = document.getElementById(
       'historialModal'
     ) as HTMLElement;

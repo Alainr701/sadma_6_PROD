@@ -63,7 +63,19 @@
         </div>
   
         <div *ngIf="step === 3">
-          <button class="upload-button">+ Subir Archivo</button>
+          <fieldset class="border p-3 mb-3">
+            <legend class="w-auto px-2">SUBIR ARCHIVOS</legend>
+            <p>Nota: Los archivos deben estar en formato PDF y no deben pesar más de 2MB.</p>
+            <input 
+            type="file" 
+            id="archivo"
+            (change)="subirArchivo($event)" 
+            >
+            <!-- (change)="subirArchivo($event.target.files)" -->
+            <!-- <button class="btn btn-success" (click)="subirArchivo()">
+              <i class="fas fa-upload"></i> Subir Archivo
+            </button> -->
+          </fieldset>
         </div>
   
         <div class="button-group">
