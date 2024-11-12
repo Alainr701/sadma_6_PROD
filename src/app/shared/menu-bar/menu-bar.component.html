@@ -29,7 +29,9 @@
                     </span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item" 
+            *ngIf="this.idPeronas == 1"
+            >
                 <a
                     [routerLink]="correspondencia.link"
                     class="sidebar-link"
@@ -44,7 +46,9 @@
                     </span>
                 </a>
             </li>
-            <li class="sidebar-item">
+            <li class="sidebar-item" 
+            *ngIf="this.idPeronas == 1"
+            >
                 <a
                     [routerLink]="control.link"
                     class="sidebar-link"

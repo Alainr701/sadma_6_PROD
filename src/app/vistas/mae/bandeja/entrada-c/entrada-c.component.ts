@@ -44,15 +44,18 @@ export class EntradaCComponent implements OnInit {
   }
 
   async ngOnInit() {
-    let body= {
-      "id_personas":this.appService.userData.id_personas,
-      "estado":"DERIVADO",
-       "estado2":"REMITIDO"
-    }
-    let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
-    this.correspondencias = res.data;
+    await this.getLista();
 }
 
+async getLista() {
+  let body= {
+    "id_personas":this.appService.userData.id_personas,
+    "estado":"DERIVADO",
+     "estado2":"REMITIDO"
+  }
+  let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
+  this.correspondencias = res.data;
+}
   showDetails = false;
 
   toggleDetails(correspondence: Correspondences): void {
@@ -78,7 +81,7 @@ export class EntradaCComponent implements OnInit {
           "id_proveido_personas": this.appService.userData.id_personas
         };
       let res =  await this.serviceCorrespondencia.aceptarDerivacion(body); 
-
+        await this.getLista();
         Swal.fire('¡Aceptado!', 'La acción ha sido confirmada.', 'success');
         
       } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -113,7 +116,7 @@ export class EntradaCComponent implements OnInit {
           "observacion": razonRechazo,
         };
         let res = await this.serviceCorrespondencia.rechazarDerivacion(body);
-        
+        await this.getLista();
         Swal.fire('¡Rechazado!', 'La opción ha sido rechazada.', 'success');
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire('Cancelado', 'La acción ha sido cancelada.', 'info');
@@ -148,7 +151,7 @@ export class EntradaCComponent implements OnInit {
   }
   async getRemitente(correspondence: Correspondences){
     let body = {
-      id_personas: correspondence.id_personas,
+      id_personas: correspondence.id_proveido_personas,
     }
     let res = await this.serviceCorrespondencia.buscarPersona(body);
     this.selectedPersona = res.data[0];

@@ -42,12 +42,25 @@ export class FormDerivacionComponent {
   };
   listaPersonas:SPersonas[]=[];
   selectedPersona: SPersonas | any = null;
+  codigoInterno: string = '';
   constructor(
     private correspondenciaService: CorrespondenciaService,
     private appService: AppService
   ) { }
-  async ngOnInit() { 
 
+
+  async ngOnInit() { 
+    
+
+
+  }
+  
+  async getNumeroCorrespondencia(){
+    let body = {
+      id_hoja_de_ruta: this.correspondenciaService.derivarCorrespondence.id_hoja_de_ruta
+    }
+    let res  = await this.correspondenciaService.obternerCodigoInterno(body);   
+    this.codigoInterno= res.data[0].codigo_interno;
   }
 
   async  ngAfterViewInit(){
@@ -64,6 +77,8 @@ export class FormDerivacionComponent {
 
   async openModal() {
     console.log('Método openModal llamado en FormDerivacionComponent');
+
+    await this.getNumeroCorrespondencia();
     const res= await this.correspondenciaService.obtenerPersonasUnidad(); 
     this.listaPersonas = res.data;
     this.isModalVisible = true;

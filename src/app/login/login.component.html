@@ -1,10 +1,11 @@
 
-    <div class="container">
         <div class="container">
             <div class="row justify-content-center">
               <div class="col-md-6">
                 <div class="card mt-5">
-                  <div class="card-header text-center">
+                  <div class="card-header text-center"
+                  style="background-color: #0e2238;"
+                  >
                     <h4>Login</h4>
                   </div>
                   <div class="card-body">
@@ -17,23 +18,22 @@
                         <label for="password">Password</label>
                         <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control" required>
                       </div>
-                      <button type="submit" class="btn btn-primary mt-4 w-100">Login</button>
+                      <button 
+                      style="background-color: #0e2238; color: #f1f1f1;"
+                      type="submit" class="btn mt-4 w-100">Ingresar</button>
                     </form>
                     <div class="text-center mt-4">
-                      <a [routerLink]="['/olvidar-contraseña']"> Olvidaste tu contraseña?</a>
+                      <a 
+                      style="color: #0e2238;"
+                      [routerLink]="['/olvidar-contraseña']"> Olvidaste tu contraseña?</a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-    </div>
 
-    <footer class="footer mt-auto py-3">
-      <div class="container">
-        <span class="text-muted">Derechos Reservados  </span>
-      </div>
-    </footer> 
+    
     <style>
       .card {
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);

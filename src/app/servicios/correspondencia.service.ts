@@ -67,6 +67,9 @@ export class CorrespondenciaService {
   async obtenerUnaCorrespondencia(body:any) : Promise<ResponseI>{
     return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/obtenerUnaCorrespondencia`, body));
   }  
+  async obternerCodigoInterno(body:any) : Promise<ResponseI>{
+    return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/obternerCodigoInterno`, body));
+  }
   
   
 }

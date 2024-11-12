@@ -1,5 +1,8 @@
 
-<app-form-derivacion (close)="handleClose()" >
+<app-form-derivacion 
+*ngIf="isModalVisibleDerivacion"
+
+(close)="handleClose()" >
 </app-form-derivacion>
 
 <div class="backgroud-cards">
@@ -9,7 +12,9 @@
         <span style="font-size: 20px;">Mis Correspondencias</span>
       </div>
       <div class="d-flex justify-content-end mb-3">
-        <button type="button" class="btn btn-primary" (click)="openModal(null)">
+        <button type="button" class="btn" style="background-color: rgba(27, 100, 236, 0.5); border-color: 
+        rgba(3, 84, 142, 0.5);
+        color: white;" (click)="openModal(null)">
           <i class="bi bi-plus-circle"></i> Nueva Correspondencia
         </button>
       </div>
@@ -208,12 +213,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="nuevaCorrespondenciaModalLabel">Crear Nueva Correspondencia</h5>
+        <h5 class="modal-title text-primary text-center" id="nuevaCorrespondenciaModalLabel" style="font-size: 20px;color: #3700ff;">
+          <i class="bi bi-envelope-fill"></i> Crear Nueva Correspondencia
+        </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <!-- Aquí llamamos al componente Formulario -->
         <app-formulario
+        (close)="cerrando()"
         [doc]="doc"
         ></app-formulario>
       </div>

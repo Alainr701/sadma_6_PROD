@@ -1,4 +1,6 @@
-<app-form-derivacion></app-form-derivacion>
+<app-form-derivacion
+onclose="handleClose()"
+></app-form-derivacion>
 
 <div class="container backgroud-cards" style="margin-top: 30px;">
   <div class="d-flex">
@@ -76,7 +78,9 @@
               (click)="derivar(correspondence)">
               <i class="bi bi-box-arrow-up-right fs-6"></i> <span class="btn-text">DERIVAR</span>
             </button>
-            <button type="button" class="btn btn-outline-light mx-2 btn-small-text"
+            <button 
+            *ngIf="idPeronas == 1"
+             type="button" class="btn btn-outline-light mx-2 btn-small-text"
               (click)="concluir(correspondence)"
             >
               <i class="bi bi-box-arrow-down fs-6"></i> <span class="btn-text">CONCLUIR</span>

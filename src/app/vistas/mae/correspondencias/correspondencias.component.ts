@@ -58,6 +58,8 @@ export class CorrespondenciasComponent {
  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('nuevaCorrespondenciaModal') modalElement!: ElementRef;
+
   constructor( private serviceCorrespondencia: CorrespondenciaService,private appService: AppService, private modalService: NgbModal) {
   }
   showModalVer:boolean =false;
@@ -89,12 +91,23 @@ export class CorrespondenciasComponent {
   }
   correspondencias: Correspondences[] = [];
   async ngOnInit() {
+    await this.getLista();
+  }
+  async getLista(){
     let body= {
       "id_personas":this.appService.userData.id_personas,
       "estado":"CREADO"
     }
     let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
     this.correspondencias = res.data;
+  }
+
+  async cerrando(){
+    this.isOpenModal = false;
+    document.querySelector('.modal-backdrop')?.remove();
+    await this.getLista();
+   
+
   }
 
   toggleDetails(correspondence: Correspondences): void {
@@ -134,23 +147,12 @@ export class CorrespondenciasComponent {
   @ViewChild(FormDerivacionComponent) formDeriva!: FormDerivacionComponent;
 
   async derivar(correspondence: Correspondences) {
-    this.showModalVer=true;
-    //TODO REVISAR
+    
+    this.isModalVisibleDerivacion=true;
     correspondence.usu_mod=null;
     this.serviceCorrespondencia.derivarCorrespondence= correspondence;
     await this.formDeriva.openModal();
-    // this.formDeriva.closeModal();
-    // let body= {
-    //   "id_personas":this.appService.userData.id_personas,
-    //   "estado":"CREADO"
-    // }
-    // let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
-    // this.correspondencias = res.data;
-    // if (this.formDeriva) { 
-    // } else {
-    //   console.error('El componente formDeriva no está inicializado.');
-   
-    // }
+
   }
   selectedPersona: SPersonas | null= null;
 
@@ -180,19 +182,12 @@ export class CorrespondenciasComponent {
     link.download = 'documento.pdf';
     link.click();
 }
+
+isModalVisibleDerivacion:boolean=false;
 async handleClose() {
+  this.isModalVisibleDerivacion = false;
   console.log('Evento close recibido desde el componente hijo');
-  if (this.formDeriva) {
-    this.formDeriva!.cerrarModal!();
-    let body= {
-      "id_personas":this.appService.userData.id_personas,
-      "estado":"CREADO"
-    }
-    let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
-    this.correspondencias = res.data;
-  } else {
-    console.error('El componente formDeriva no está inicializado.');
-  }
+  await this.getLista();
   // Puedes realizar aquí cualquier otra acción que necesites al cerrar el formulario
 }
 }

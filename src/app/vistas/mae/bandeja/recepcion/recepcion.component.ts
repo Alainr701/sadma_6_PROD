@@ -22,7 +22,12 @@ export class RecepcionComponent {
   correspondencias: Correspondences[] = [];
   selectedPersona: SPersonas | null= null;
 
+  idPeronas = null;
+    
+ 
   async ngOnInit() {
+    let data = JSON.parse(sessionStorage.getItem('userData') || 'null');
+    this.idPeronas = data.id_personas;
     let body= {
       "id_personas":this.appService.userData.id_personas,
       "estado":"ACEPTADO"
@@ -96,7 +101,7 @@ export class RecepcionComponent {
   }
   async getRemitente(correspondence: Correspondences){
     let body = {
-      id_personas: correspondence.id_personas,
+      id_personas: correspondence.id_proveido_personas,
     }
     let res = await this.serviceCorrespondencia.buscarPersona(body);
     this.selectedPersona = res.data[0];
@@ -148,6 +153,11 @@ export class RecepcionComponent {
         Swal.fire('Cancelado', 'La acción ha sido cancelada.', 'info');
       }
     });
+    }
+    async handleClose()
+    {
+      
+
     }
 
 

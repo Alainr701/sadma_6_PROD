@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppService } from 'src/app/servicios/app.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -25,10 +26,15 @@ export class MenuBarComponent {
 //   help = this.menuItems[4];
 
   
+constructor(private appService: AppService) { 
+  
+}
 
-  constructor() { }
-
+idPeronas = null;
   ngOnInit(): void {
+    
+     let data = JSON.parse(sessionStorage.getItem('userData') || 'null');
+     this.idPeronas = data.id_personas;
     // Obtén los elementos de manera segura
     const hamBurger = document.querySelector('.toggle-btn') as HTMLElement | null;
     const sidebar = document.querySelector('#sidebar') as HTMLElement | null;
