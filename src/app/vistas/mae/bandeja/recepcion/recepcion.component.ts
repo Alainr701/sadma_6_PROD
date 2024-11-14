@@ -7,6 +7,8 @@ import { Correspondences } from '../../correspondencias/correspondencias.compone
 import { AppService, SPersonas } from 'src/app/servicios/app.service';
 import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
 import { FormDerivacionComponent } from 'src/app/shared/form-derivacion/form-derivacion.component';
+import { ResponseI } from 'src/app/interfaces/response';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -84,7 +86,7 @@ export class RecepcionComponent {
     //   this.historialDataSource.sort = this.sort;
     // }
   }
-  constructor( private serviceCorrespondencia: CorrespondenciaService ,private appService: AppService) {
+  constructor( private serviceCorrespondencia: CorrespondenciaService ,private appService: AppService,private modalService: NgbModal) {
   }
   showHistorial(correspondence: Correspondences): void {
     // this.selectedCorrespondence = correspondence;
@@ -99,6 +101,22 @@ export class RecepcionComponent {
     //   modal.show();
     // }
   }
+  pdfSrc = '';
+  @ViewChild('pdfModal') pdfModal: any;
+  async openPdfModal(correspondence: any) {
+
+    let res: ResponseI = await this.serviceCorrespondencia.obtenerDoc({
+      "id_hoja_de_ruta": correspondence.id_hoja_de_ruta
+    });
+    this.pdfSrc = res.data.doc64; 
+    this.modalService.open(this.pdfModal, { size: 'lg', backdrop: 'static' });
+  }
+  descargar(pdfSrc: any) {
+    const link = document.createElement('a');
+    link.href = pdfSrc;
+    link.download = 'documento.pdf';
+    link.click();
+}
   async getRemitente(correspondence: Correspondences){
     let body = {
       id_personas: correspondence.id_proveido_personas,
@@ -210,3 +228,4 @@ export class RecepcionComponent {
 function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+

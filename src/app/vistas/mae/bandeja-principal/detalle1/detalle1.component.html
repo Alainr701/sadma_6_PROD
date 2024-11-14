@@ -1,21 +1,21 @@
 <div class="container m-4">
    
     <!-- Botón para regresar a la vista principal -->
-    <button class="btn btn-primary" (click)="volver()">Volver a la Bandeja Principal</button>
+    <button class="btn " style="background-color: #0e2238;color: white;"  (click)="volver()">Volver a la Bandeja Principal</button>
 
 
     <div class="container mt-4">
       <div class="table-responsive">
         <table class="table table-hover text-center align-middle">
-          <thead class="table-info">
+          <thead style="background-color: #0e2238;color: white;">
             <tr>
-              <th>CODIGO</th>
-              <th>REFERENCIA</th>
-              <th>DERIVADO DE </th>
-              <th> ACEPTADO POR</th>
-              <th>FECHA ACEPTACION</th>
-              <th>HISTORIAL</th>
-              <th>MAS DETALLES</th>
+              <th style="color: white;">CODIGO</th>
+              <th style="color: white;">REFERENCIA</th>
+              <th style="color: white;">DERIVADO DE </th>
+              <th style="color: white;"> ACEPTADO POR</th>
+              <th style="color: white;">FECHA ACEPTACION</th>
+              <th style="color: white;">HISTORIAL</th>
+              <th style="color: white;">MAS DETALLES</th>
             </tr>
           </thead>
           <tbody>
@@ -28,12 +28,12 @@
                   {{ correspondence.referencia}}
                 </td>
                 <td class="d-block d-md-table-cell">
-                    <button type="button" class="btn btn-info" (click)="remitente(correspondence.id_proveido_personas)">
+                    <button type="button" class="btn" style="background-color: #132f4d; color: white;"  (click)="remitente(correspondence.id_proveido_personas)">
                         <i class="bi bi-person-circle"></i> Derivado por
                       </button>
                 </td>
                 <td class="d-block d-md-table-cell">
-                    <button type="button" class="btn btn-info" (click)="remisor(correspondence.id_personas)">
+                    <button type="button" class="btn" style="background-color: #3b5d82; color: white;" (click)="remisor(correspondence.id_personas)">
                         <i class="bi bi-person-circle"></i> Aceptado por
                       </button>
                 </td>

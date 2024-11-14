@@ -38,7 +38,7 @@
   border-color: #454d55;
 }
 .table-hover tbody tr:hover {
-  background-color: #495057;
+  background-color: #508dcaca;
 }
 .table-dark .col-nro {
   width: 25px;
