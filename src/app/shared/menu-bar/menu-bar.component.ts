@@ -24,7 +24,7 @@ export class MenuBarComponent {
   correspondencia = this.menuItems[1]; 
   control = this.menuItems[2];
   persona = this.menuItems[3];
-  reportes = this.reportes[4];
+  reportes = this.menuItems[4];
 //   services = this.menuItems[2];
 //   contact = this.menuItems[3];
 //   help = this.menuItems[4];
