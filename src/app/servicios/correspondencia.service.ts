@@ -70,6 +70,25 @@ export class CorrespondenciaService {
   async obternerCodigoInterno(body:any) : Promise<ResponseI>{
     return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/obternerCodigoInterno`, body));
   }
-  
-  
+async obtenerRoles(): Promise<ResponseI> {
+  return lastValueFrom(this.http.get<ResponseI>(`${this.httpA}/obtenerRoles`));
+}
+
+async obtenerCargos(): Promise<ResponseI> {
+  return lastValueFrom(this.http.get<ResponseI>(`${this.httpA}/obtenerCargos`));
+}
+
+async obtenerUnidades(): Promise<ResponseI> {
+  return lastValueFrom(this.http.get<ResponseI>(`${this.httpA}/obtenerUnidades`));
+}
+async agregarPersona(body:any): Promise<ResponseI> {
+  return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/agregarPersonas`, body));
+}
+async agregarUsuarios(body:any): Promise<ResponseI> {
+  return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/agregarUsuarios`, body));
+}  
+async consultarPersonas(): Promise<ResponseI> {
+  return lastValueFrom(this.http.get<ResponseI>(`${this.httpA}/consultarPersonas`));
+}
+
 }

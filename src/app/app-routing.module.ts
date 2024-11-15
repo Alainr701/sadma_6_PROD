@@ -12,6 +12,8 @@ import { RecepcionComponent } from './vistas/mae/bandeja/recepcion/recepcion.com
 import { CorrespondenciasComponent } from './vistas/mae/correspondencias/correspondencias.component';
 import { FormularioComponent } from './vistas/mae/correspondencias/formulario/formulario.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { UsuariosComponent } from './vistas/usuarios/usuarios.component';
+import { ReportesComponent } from './vistas/reportes/reportes.component';
 
 
 
@@ -45,13 +47,20 @@ const routes: Routes = [
     },
     {
       path:'detalle',component:Detalle1Component
-    }
-    
+    },
+  { 
+      path: 'usuarios', component: UsuariosComponent 
+    },
+    { path: 'reportes', component: ReportesComponent},
     ] 
 },
 
 
 { path: 'busqueda_externa', component: BusquedaComponent },
+
+
+
+
   // { path: 'mae/inicio', component: MenuBarComponent },
   // { path: 'mae/bandeja-principal', component:BandejaPrincipalComponent},
   // { path: 'mae/bandeja', component: BandejaComponent },

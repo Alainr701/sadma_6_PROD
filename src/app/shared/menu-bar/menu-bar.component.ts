@@ -11,6 +11,8 @@ export class MenuBarComponent {
     { label: 'Bandeja', link: '/mae/bandeja' ,icon: 'bi bi-envelope', badge: 169 },
     { label: 'Crear Correspondencia', link: '/mae/correspondencias' ,icon: 'bi bi-file-earmark'},
     { label: 'Control de Correspondencia', link: '/mae/control' ,icon: 'bi bi-file-earmark-text' },
+    { label: 'Agregar Usuarios', link: '/mae/usuarios' ,icon: 'bi bi-person' },
+    { label: 'Reportes', link: '/mae/reportes ' ,icon: 'bi bi-person' },
     // { label: 'Home', link: '/mae/bandeja' ,icon: 'bi bi-envelope', badge: 169 },
     // { label: 'Esto a donde', link: '/mae/inicio', icon: 'bi bi-file-earmark-plus' },
     // { label: 'Control de Correspondencia', link: '/mae/bandeja-principal', icon: 'bi bi-file-earmark-text' },
@@ -21,6 +23,8 @@ export class MenuBarComponent {
   bandeja = this.menuItems[0]; 
   correspondencia = this.menuItems[1]; 
   control = this.menuItems[2];
+  persona = this.menuItems[3];
+  reportes = this.reportes[4];
 //   services = this.menuItems[2];
 //   contact = this.menuItems[3];
 //   help = this.menuItems[4];

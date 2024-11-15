@@ -27,6 +27,8 @@ import { FormularioComponent } from './vistas/mae/correspondencias/formulario/fo
 import { FormDerivacionComponent } from './shared/form-derivacion/form-derivacion.component';
 import { DomSanitizerCreacionSolicitudesPipe } from './dom-sanitizer-creacion-solicitudes.pipe';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { UsuariosComponent } from './vistas/usuarios/usuarios.component';
+import { ReportesComponent } from './vistas/reportes/reportes.component';
 
 
 
@@ -50,7 +52,9 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     FormularioComponent,
     FormDerivacionComponent,
     DomSanitizerCreacionSolicitudesPipe,
-    BusquedaComponent
+    BusquedaComponent,
+    UsuariosComponent,
+    ReportesComponent
     
   ],
   imports: [

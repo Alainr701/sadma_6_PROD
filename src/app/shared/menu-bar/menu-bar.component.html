@@ -63,6 +63,23 @@
                     </span>
                 </a>
             </li>
+            <li class="sidebar-item" 
+            *ngIf="this.idPeronas == 1"
+            >
+                <a
+                    [routerLink]="persona.link"
+                    class="sidebar-link"
+                >
+                    <i [class]="persona.icon"></i>
+                    <span>{{ persona.label }}</span>
+                    <span
+                        *ngIf="persona.badge"
+                        class="badge"
+                    >
+                        {{ persona.badge }}
+                    </span>
+                </a>
+            </li>
 
           <div class="sidebar-footer">
             <a
