@@ -39,6 +39,9 @@ export class CorrespondenciaService {
   async  aceptarDerivacion(body:any) : Promise<ResponseI>{
     return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/aceptarDerivacion`, body));
   }
+async aceptarDerivacionHistorial(body: any): Promise<ResponseI> {
+  return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/aceptarDerivacionHistorial`, body));
+}
   async  rechazarDerivacion(body:any) : Promise<ResponseI>{
     return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/rechazarDerivacion`, body));
   }
@@ -84,11 +87,21 @@ async obtenerUnidades(): Promise<ResponseI> {
 async agregarPersona(body:any): Promise<ResponseI> {
   return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/agregarPersonas`, body));
 }
+async actualizarPersona(body:any): Promise<ResponseI> {
+  return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/actualizarPersona`, body));
+}
+/*************  ✨ Codeium Command ⭐  *************/
+async actualizarUsuarios(body: any): Promise<ResponseI> {
+  return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/actualizarUsuarios`, body));
+}
 async agregarUsuarios(body:any): Promise<ResponseI> {
   return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/agregarUsuarios`, body));
 }  
 async consultarPersonas(): Promise<ResponseI> {
   return lastValueFrom(this.http.get<ResponseI>(`${this.httpA}/consultarPersonas`));
-}
 
+}
+async actualizarEstadoUsuario(body:any): Promise<ResponseI> {
+  return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/actualizarEstadoUsuario`, body));
+}
 }

@@ -109,10 +109,12 @@ export class FormularioComponent {
       console.log('=================================');
       console.log(JSON.stringify(this.documento, null, 2));
       console.log('=================================');
+      
       let  res :ResponseI = await this.correspondenciaService.sendCorrespondencia(this.documento);
       console.log('=================================');
       console.log(JSON.stringify(res, null, 2));
       console.log('=================================');
+      
       if (!res.status) {
         this.mostrarErrorMensaje('No se pudo crear la hoja de ruta');
         return;

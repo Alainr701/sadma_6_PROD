@@ -60,7 +60,8 @@ export class FormDerivacionComponent {
       id_hoja_de_ruta: this.correspondenciaService.derivarCorrespondence.id_hoja_de_ruta
     }
     let res  = await this.correspondenciaService.obternerCodigoInterno(body);   
-    this.codigoInterno= res.data[0].codigo_interno;
+    this.codigoInterno= res.data;
+    
   }
 
   async  ngAfterViewInit(){

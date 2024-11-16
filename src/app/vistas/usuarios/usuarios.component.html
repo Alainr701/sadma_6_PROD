@@ -27,8 +27,8 @@
             <td>{{ user.nombres }}</td>
             <td>{{ user.apellidos }}</td>
             <td>{{ user.ci }}</td>
+            <td>{{ user.celular}}</td>
             <td>{{ user.roles }}</td>
-            <td>{{ ""}}</td>
             <td>
               <button
                 (click)="toggleEstado(user)"
@@ -38,7 +38,7 @@
                 }"
                 class="btn btn-sm"
               >
-                {{ user.estado }}
+                {{ user.estado ? "Habilitado" : "Deshabilitado" }}
               </button>
             </td>
             <td>{{ user.usuario }}</td>
@@ -54,7 +54,9 @@
         <div class="modal-header">
           <h5 class="modal-title" id="modalAgregarTecnicoLabel">Agregar Técnico</h5>
           <!-- Botón para cerrar el modal (X) -->
-          <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+          <button id="ModalClose" type="button" class="btn-close"
+          data-bs-dismiss="modal" 
+           (click)="closeModal()" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <!-- Formulario para agregar un técnico -->
@@ -64,7 +66,7 @@
             <div class="row mb-3">
               <div class="col-md-4">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre">z
+                <input type="text" class="form-control" id="nombre" [(ngModel)]="nombre">
               </div>
               <div class="col-md-4">
                 <label for="apellido" class="form-label">Apellidos</label>
@@ -120,22 +122,29 @@
               </div>
               <div class="col-md-4">
                   <label for="rol" class="form-label">Rol</label>
-                  <select class="form-select" id="rol" [(ngModel)]="rol">
-                    <option *ngFor="let rol of listaRoles" [value]="rol.id">{{rol.nombre}}</option>
+                  <select class="form-select" id="rol"
+                   >
+                    <option *ngFor="let rol of listaRoles"
+                    [selected]="rolSelected"
+                     [value]="rol.id">{{rol.nombre}}</option>
                   </select>
               </div>
             </div>
             <div class="row mb-3">
               <div class="col-md-6">
                   <label for="unidad" class="form-label">Unidad</label>
-                  <select class="form-select" id="unidad" [(ngModel)]="unidad">
-                    <option *ngFor="let unidad of listaUnidades" [value]="unidad.id">{{unidad.nombre}}</option>
+                  <select class="form-select" id="unidad">
+                    <option *ngFor="let unidad of listaUnidades" 
+                    [selected]="unidadSelected"
+                    [value]="unidad.id">{{unidad.nombre}}</option>
                   </select>
               </div>
               <div class="col-md-6">
                   <label for="cargo" class="form-label">Cargo</label>
-                  <select class="form-select" id="cargo" [(ngModel)]="cargo">
-                    <option *ngFor="let cargo of listaCargos" [value]="cargo.id">{{cargo.nombre}}</option>
+                  <select class="form-select" id="cargo">
+                    <option *ngFor="let cargo of listaCargos"
+                    [selected]="cargoSelected"
+                     [value]="cargo.id">{{cargo.nombre}}</option>
                   </select>
               </div>
             </div>
@@ -143,7 +152,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
-          <button type="button" class="btn btn-primary" (click)="guardarTecnico()">Guardar</button>
+          <button type="button" class="btn btn-primary" 
+          (click)="this.usuarios !== null?actualizarTecnico(): guardarTecnico() ">
+            {{this.usuarios !== null ? 'Actualizar' : 'Guardar'}}</button>
         </div>
       </div>
     </div>

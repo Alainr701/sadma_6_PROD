@@ -156,6 +156,16 @@ export class RecepcionComponent {
               "observacion": razonConclusion,
             };
             let res = await this.serviceCorrespondencia.concluidoGamea(body);
+
+            let resHistorial: ResponseI = await this.serviceCorrespondencia.
+            aceptarDerivacionHistorial({ // esto guarda en el historial de derivaciones
+              "id_personas": correspondence.id_personas,
+              "id_hoja_de_ruta": correspondence.id_hoja_de_ruta,
+              "estado": 'CONCLUIDO',
+              "id_documento_save":  null,
+              "id_proveido_personas": this.appService.userData.id_personas,
+            })
+      
             Swal.fire('¡Concluido!', 'Se ha concluido la correspondencia.', 'success');
           } else if (result2.dismiss === Swal.DismissReason.cancel) {
             let body = {
@@ -164,6 +174,14 @@ export class RecepcionComponent {
               "observacion": razonConclusion,
             };
             let res = await this.serviceCorrespondencia.concluidoGamea(body);
+            let resHistorial: ResponseI = await this.serviceCorrespondencia.
+            aceptarDerivacionHistorial({ // esto guarda en el historial de derivaciones
+              "id_personas": correspondence.id_personas,
+              "id_hoja_de_ruta": correspondence.id_hoja_de_ruta,
+              "estado": 'DERIVADO_GAMEA',
+              "id_documento_save":  null,
+              "id_proveido_personas": this.appService.userData.id_personas,
+            })
             Swal.fire('¡Concluido!', 'Se ha concluido la correspondencia.', 'success');
           }
         });
