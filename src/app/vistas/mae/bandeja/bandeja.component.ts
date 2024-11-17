@@ -14,6 +14,9 @@ export class BandejaComponent {
     let data = JSON.parse(sessionStorage.getItem('userData') || 'null');
     this.idPersonas = data.id_personas;
   }
+  async actualizarPage(){
+    window.location.reload();
+  }
 
   onEntriesChange(event: any) {
     console.log('Selected entries:', this.selectedEntries);

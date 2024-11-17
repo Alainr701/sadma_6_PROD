@@ -9,6 +9,7 @@ import { AppService, SPersonas } from 'src/app/servicios/app.service';
 import { DerivationData } from 'src/app/shared/form-derivacion/form-derivacion.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResponseI } from 'src/app/interfaces/response';
+import { timer } from 'rxjs';
 
 
 
@@ -92,8 +93,10 @@ async getLista() {
       })
 
         await this.getLista();
-        Swal.fire('¡Aceptado!', 'La acción ha sido confirmada.', 'success');
+        await Swal.fire('¡Aceptado!', 'La acción ha sido confirmada.', 'success');
+        window.location.reload();
         
+      
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire('Cancelado', 'La acción ha sido cancelada.', 'info');
       }

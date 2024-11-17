@@ -4,10 +4,11 @@ import {MatPaginator} from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Correspondences } from '../../correspondencias/correspondencias.component';
-import { AppService } from 'src/app/servicios/app.service';
+import { AppService, SPersonas } from 'src/app/servicios/app.service';
 import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ResponseI } from 'src/app/interfaces/response';
+import { HistorialApp } from '../entrada-c/entrada-c.component';
 
 
 
@@ -22,6 +23,8 @@ export class ConcluidosComponent {
 
   
   correspondencias: Correspondences[] = [];
+  selectedPersona: SPersonas | null= null;
+  listaHistorial: HistorialApp[] = [];
 
 
   constructor( private serviceCorrespondencia: CorrespondenciaService ,private appService: AppService,private modalService: NgbModal) {
@@ -30,7 +33,8 @@ export class ConcluidosComponent {
   async ngOnInit(){
     let body= {
       "id_personas":this.appService.userData.id_personas,
-      "estado":"CONCLUIDO"
+      "estado":"CONCLUIDO",
+      "estado2":"DERIVADO_GAMEA"
     }
     let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
     this.correspondencias = res.data;
@@ -95,7 +99,14 @@ export class ConcluidosComponent {
     //   this.historialDataSource.sort = this.sort;
     // }
   }
-  showHistorial(correspondence: Correspondences): void {
+  async showHistorial(correspondence: Correspondences){
+    this.selectedCorrespondence = correspondence;
+    
+    let body = {
+      "id_hoja_de_ruta": correspondence.id_hoja_de_ruta
+    }
+    let data = await this.serviceCorrespondencia.getHistorial(body);
+    this.listaHistorial = data.data
     // this.selectedCorrespondence = correspondence;
     // if (this.selectedCorrespondence && this.selectedCorrespondence.detalles.historial) {
     //   this.historialDataSource = new MatTableDataSource(this.selectedCorrespondence.detalles.historial);
@@ -130,6 +141,14 @@ export class ConcluidosComponent {
     //   }
     // });
   }
+  async getRemitente(correspondence: Correspondences){
+    let body = {
+      id_personas: correspondence.id_proveido_personas,
+    }
+    let res = await this.serviceCorrespondencia.buscarPersona(body);
+    this.selectedPersona = res.data[0];
+  }
+
   pdfSrc = ''; // Asegúrate de tener el valor de `pdfSrc` que deseas mostrar.
   @ViewChild('pdfModal') pdfModal: any;
   async openPdfModal(correspondence: any) {

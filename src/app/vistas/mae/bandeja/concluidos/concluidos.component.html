@@ -1,118 +1,281 @@
-<div class="container" style="margin-top: 30px;">
+<div
+    class="container"
+    style="margin-top: 30px;"
+>
     <div class="container">
-      <ng-container *ngFor="let correspondence of correspondencias">
-        <div class="card mb-3" style="width: auto;">
-          <div class="card-header">
-            <div class="row">
-              <!-- Columna de títulos -->
-              <div class="col-md-5">
-                <div class="d-flex align-items-center justify-content-between">
-                  <div class="letter-image">
-                    <div class="animated-mail">
-                      <div class="back-fold"></div>
-                      <div class="letter">
-                        <div class="letter-border"></div>
-                        <div class="letter-title"></div>
-                        <div class="letter-context"></div>
-                        <div class="letter-stamp"></div>
-                      </div>
-                      <div class="top-fold"></div>
-                      <div class="body"></div>
-                      <div class="left-fold"></div>
-                    </div>
-                    <div class="shadow"></div>
-                  </div>
-                  <span class="card-header-text">{{ correspondence.codigo_interno }}</span>
-                </div>
-              </div>
-              <!-- Columna 2: Botones -->
-              <div class="col-md-3 btn-container">
-                <!-- Botones del mismo tamaño y espaciados -->
-                <button type="button" class="btn btn-outline-light d-flex flex-column align-items-center" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                  <i class="bi bi-person-circle small-icono-btn fs-4"></i>
-                  <span>Concluido Por</span>
-                </button>
-                <!-- Botón de Acciones con funcionalidad de colapso -->
-                <button class="btn btn-outline-light" type="button" (click)="toggleCollapse(correspondence)">
-                  <i class="bi bi-gear small-icono-btn fs-4"></i>
-                  <span>Acciones</span>
-                </button>
-                <button class="btn btn-outline-light" (click)="toggleDetails(correspondence)">
-                  <i class="bi bi-envelope-paper fs-4"></i> Ver Más
-                </button>
-              </div>
-              <!-- Columna 3: Información -->
-              <div class="col-md-4 d-flex flex-column align-items-start">
-                
-                <div class="d-flex align-items-center mb-2">
-                  <strong class="badge bg-success" style="font-size: 0.7rem;">
-                    <i class="bi bi-calendar-check small-icon me-1"></i> FECHA CONCLUSION: {{ correspondence.fec_mod | date: 'dd/MM/yyyy' }}
-                  </strong>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-          <!-- Contenido colapsable con botones centrados -->
-          <div *ngIf="!correspondence.isCollapsed">
-            <div class="d-flex justify-content-center py-3">
-              <button type="button" class="btn btn-outline-light mx-2 btn-small-text"
-              (click)="desconcluir(correspondence)"
-              >
-                <i class="bi bi-box-arrow-down fs-6"></i> <span class="btn-text">  DESCONCLUIR</span>
-              </button>
-            </div>
-          </div>
-    </div>
-  
-     <!-- Detalles externos a la tarjeta -->
-     <div class="details-container mb-3" [ngClass]="{'d-none': !correspondence.showDetails}" style="background-color: transparent; border: none;">
-      <div class="table-responsive">
-        <table class="table table-hover mb-3 w-100 text-center custom-font fs-7">
-          <thead>
-            <tr>
-              <th class="text-white" scope="col" style="width: 33%;"><strong><i class="bi bi-file-earmark-check fs-3"></i> PROVEIDO:</strong></th>
-              <th class="text-white" scope="col" style="width: 34%;"><strong><i class="bi bi-info-circle fs-3"></i> DESCRIPCIÓN:</strong></th>
-              <th class="text-white" scope="col" style="width: 33%;"><strong><i class="bi bi-link-45deg fs-3"></i> REFERENCIA:</strong></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-wrap text-white">{{ correspondence.historial?.proveido }}</td>
-              <td class="text-wrap text-white">{{ correspondence.descripcion }}</td>
-              <td class="text-wrap text-white">{{ correspondence.referencia }}</td>
-            </tr>
-          </tbody>
-          <thead>
-            <tr>
-              <th class="text-white" scope="col" style="width: 33%;"><strong><i class="bi bi-file-text fs-3"></i> OBSERVACIÓN:</strong></th>
-              <th class="text-white" scope="col" style="width: 34%;"><strong><i class="bi bi-buildings fs-3"></i> CITE:</strong></th>
-              <th class="text-white" scope="col" style="width: 33%;"><strong><i class="bi bi-chat fs-3"></i> ACCIÓN:</strong></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-wrap text-white">{{ correspondence.observacion }}</td>
-              <td class="text-wrap text-white">{{ correspondence.cite }}</td>
-              <td class="text-wrap text-white"> {{correspondence.estado}} </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="d-flex justify-content-center gap-2">
-        <button class="btn btn-info" style="background-color: rgba(23, 162, 184, 0.5); border-color: rgba(23, 162, 184, 0.5); color: white;" (click)="openPdfModal(correspondence)">
-          <i class="bi bi-file-earmark-pdf-fill"> Ver Documento</i>
-        </button>
-        <button class="btn btn-info" 
-    style="background-color: rgba(23, 162, 184, 0.5); border-color: rgba(23, 162, 184, 0.5); color: white;" 
-    (click)="showHistorial(correspondence)">
-    <i class="bi bi-file-earmark-pdf-fill"> Ver Historial</i>
-      </button>
-      </div>
-    </div>
+        <ng-container *ngFor="let correspondence of correspondencias">
+            <div
+                class="card mb-3"
+                style="width: auto;"
+            >
+                <div class="card-header">
+                    <div class="row">
+                        <!-- Columna de títulos -->
+                        <div class="col-md-5">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="letter-image">
+                                    <div class="animated-mail">
+                                        <div class="back-fold"></div>
+                                        <div class="letter">
+                                            <div class="letter-border"></div>
+                                            <div class="letter-title"></div>
+                                            <div class="letter-context"></div>
+                                            <div class="letter-stamp"></div>
+                                        </div>
+                                        <div class="top-fold"></div>
+                                        <div class="body"></div>
+                                        <div class="left-fold"></div>
+                                    </div>
+                                    <div class="shadow"></div>
+                                </div>
+                                <span class="card-header-text">{{ correspondence.codigo_interno }}</span>
+                            </div>
+                        </div>
+                        <!-- Columna 2: Botones -->
+                        <div class="col-md-2 btn-container">
+                            <!-- Botones del mismo tamaño y espaciados -->
+                            <!-- <button
+                                type="button"
+                                class="btn btn-outline-light d-flex flex-column align-items-center"
+                                data-bs-toggle="modal"
+                                data-bs-target="#exampleModals"
+                                (click)="getRemitente(correspondence)"
+                            >
+                                <i class="bi bi-person-circle small-icono-btn fs-4"></i>
+                                <span>Concluido Por</span>
+                            </button> -->
+                            <!-- Botón de Acciones con funcionalidad de colapso -->
+                            <button
+                                class="btn btn-outline-light"
+                                type="button"
+                                (click)="toggleCollapse(correspondence)"
+                            >
+                                <i class="bi bi-gear small-icono-btn fs-4"></i>
+                                <span>Acciones</span>
+                            </button>
+                            <button
+                                class="btn btn-outline-light"
+                                (click)="toggleDetails(correspondence)"
+                            >
+                                <i class="bi bi-envelope-paper fs-4"></i>
+                                Ver Más
+                            </button>
+                        </div>
+                        <!-- Columna 3: Información -->
+                        <div class="col-md-4 d-flex flex-column align-items-start">
 
+                            <div class="d-flex align-items-center mb-2">
+                                <strong
+                                    class="badge bg-success"
+                                    style="font-size: 0.7rem;"
+                                >
+                                    <i class="bi bi-calendar-check small-icon me-1"></i>
+                                    FECHA CONCLUSION: {{ correspondence.fec_mod | date: 'dd/MM/yyyy' }}
+                                </strong>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Contenido colapsable con botones centrados -->
+                <div *ngIf="!correspondence.isCollapsed">
+                    <div class="d-flex justify-content-center py-3">
+                        <button
+                            *ngIf="correspondence.estado =='DERIVADO_GAMEA'"
+                            type="button"
+                            class="btn btn-outline-light mx-2 btn-small-text"
+                            (click)="desconcluir(correspondence)"
+                        >
+                            <i class="bi bi-box-arrow-down fs-6"></i>
+                            <span class="btn-text">DESCONCLUIR</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalles externos a la tarjeta -->
+            <div
+                class="details-container mb-3"
+                [ngClass]="{'d-none': !correspondence.showDetails}"
+                style="background-color: transparent; border: none;"
+            >
+                <div class="table-responsive">
+                    <table class="table table-hover mb-3 w-100 text-center custom-font fs-7">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="text-white"
+                                    scope="col"
+                                    style="width: 33%;"
+                                >
+                                    <strong>
+                                        <i class="bi bi-file-earmark-check fs-3"></i>
+                                        PROVEIDO:
+                                    </strong>
+                                </th>
+                                <th
+                                    class="text-white"
+                                    scope="col"
+                                    style="width: 34%;"
+                                >
+                                    <strong>
+                                        <i class="bi bi-info-circle fs-3"></i>
+                                        DESCRIPCIÓN:
+                                    </strong>
+                                </th>
+                                <th
+                                    class="text-white"
+                                    scope="col"
+                                    style="width: 33%;"
+                                >
+                                    <strong>
+                                        <i class="bi bi-link-45deg fs-3"></i>
+                                        REFERENCIA:
+                                    </strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-wrap text-white">
+                                    {{ correspondence.historial?.proveido }}
+                                </td>
+                                <td class="text-wrap text-white">{{ correspondence.descripcion }}</td>
+                                <td class="text-wrap text-white">{{ correspondence.referencia }}</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th
+                                    class="text-white"
+                                    scope="col"
+                                    style="width: 33%;"
+                                >
+                                    <strong>
+                                        <i class="bi bi-file-text fs-3"></i>
+                                        OBSERVACIÓN:
+                                    </strong>
+                                </th>
+                                <th
+                                    class="text-white"
+                                    scope="col"
+                                    style="width: 34%;"
+                                >
+                                    <strong>
+                                        <i class="bi bi-buildings fs-3"></i>
+                                        CITE:
+                                    </strong>
+                                </th>
+                                <th
+                                    class="text-white"
+                                    scope="col"
+                                    style="width: 33%;"
+                                >
+                                    <strong>
+                                        <i class="bi bi-chat fs-3"></i>
+                                        ACCIÓN:
+                                    </strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-wrap text-white">{{ correspondence.observacion }}</td>
+                                <td class="text-wrap text-white">{{ correspondence.cite }}</td>
+                                <td class="text-wrap text-white">{{correspondence.estado}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="d-flex justify-content-center gap-2">
+                    <button
+                        class="btn btn-info"
+                        style="background-color: rgba(23, 162, 184, 0.5); border-color: rgba(23, 162, 184, 0.5); color: white;"
+                        (click)="openPdfModal(correspondence)"
+                    >
+                        <i class="bi bi-file-earmark-pdf-fill">Ver Documento</i>
+                    </button>
+                    <button
+                        class="btn btn-info"
+                        style="background-color: rgba(23, 162, 184, 0.5); border-color: rgba(23, 162, 184, 0.5); color: white;"
+                        data-bs-toggle="modal" data-bs-target="#historialModals"
+                        (click)="showHistorial(correspondence)"
+                    >
+                        <i class="bi bi-file-earmark-pdf-fill">Ver Historial</i>
+                    </button>
+                </div>
+            </div>
    <!-- Historial Modal -->
-   <!-- <div class="modal fade" id="historialModal" aria-labelledby="historialModalLabel" aria-hidden="true">
+   <div class="modal fade" id="historialModals" aria-labelledby="historialModalsLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content custom-modal-content">
+        <div class="modal-header py-0">
+          <h5 class="modal-title" id="historialModalLabel"><i class="bi bi-file-earmark-text"></i> Historial de Correspondencia</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body">
+            <table class="table table-hover mb-3 w-100 text-center custom-font fs-7">
+              <thead>
+                <tr style="vertical-align: top;">
+                  <th  scope="col" style="width: 10%; min-width: 5rem;">
+                    <i class="bi bi-person-circle fs-3 d-block"></i>
+                    <strong>Nro:</strong>
+                  </th>
+                  <th  scope="col" style="width: 20%; min-width: 10rem;">
+                    <i class="bi bi-person-circle fs-3 d-block"></i>
+                    <strong>Remitente:</strong>
+                  </th>
+
+                  <th  scope="col" style="width: 20%; min-width: 10rem;">
+                    <i class="bi bi-calendar-check fs-3 d-block"></i>
+                    <strong>Fecha Derivación:</strong>
+                  </th>
+                  <th  scope="col" style="width: 20%; min-width: 10rem;">
+                    <i class="bi bi-person-circle fs-3 d-block"></i>
+                    <strong>Destinatario:</strong>
+                  </th>
+                  <th  scope="col" style="width: 20%; min-width: 10rem;">
+                    <i class="bi bi-calendar-check fs-3 d-block"></i>
+                    <strong>Fecha Respuesta:</strong>
+                  </th>
+                  <th  scope="col" style="width: 30%; min-width: 15rem;">
+                    <i class="bi bi-file-earmark-check fs-3 d-block"></i>
+                    <strong>Proveido Remitente:</strong>
+                  </th>
+                  <th  scope="col" style="width: 30%; min-width: 15rem;">
+                    <i class="bi bi-file-earmark-x fs-3 d-block"></i>
+                    <strong>Observacion:</strong>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of listaHistorial">
+                  <td class="text-wrap text-break">{{ item.numerador }}</td>
+
+
+                  <td class="text-wrap text-break">{{ item.nombre_remitente }} {{ item.apellido_remitente }} |<b> {{ item.cargo_remitente }} </b></td>
+
+                  <td class="text-wrap text-break">{{ item.fecha_derivacion | date: 'dd/MM/yyyy HH:mm' }}</td>
+
+                  <td class="text-wrap text-break">{{ item.nombre_destinatario  }} {{ item.apellido_destinatario }} | <b> {{ item.cargo_destinatario }} </b></td>
+
+                  <td class="text-wrap text-break">{{ item.fecha_respuesta | date: 'dd/MM/yyyy HH:mm' }}</td>
+                  <td class="text-wrap text-break">{{ item.proveido }} </td>
+                  <td class="text-wrap text-break">{{ item.obs }} </td>
+
+                </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-end">
+              <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+        
+        </div>
+    </div>
+  </div>
+  </div>
+            <!-- Historial Modal -->
+            <!-- <div class="modal fade" id="historialModal" aria-labelledby="historialModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content custom-modal-content">
         <div class="modal-header py-0">
@@ -178,61 +341,145 @@
       </div>
     </div>
   </div> -->
-  
 
-     <!-- Remitente modal--> 
-  <!-- Modal -->
-   
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <!-- Header del modal con botón cerrar alineado a la izquierda -->
-        <div class="modal-header d-flex justify-content-start">
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <!-- Cuerpo del modal -->
-        <div class="modal-body text-center">
-          <!-- Imagen del perfil -->
-          <img src="../../../../../app/USUARIO.png" class="rounded-circle mb-3" alt="Imagen del perfil" style="width: 100px; height: 100px;">
-          <!-- Nombre del usuario -->
-          <h5 class="fw-bold text-success">JOSMEL ALDO YAÑEZ TRUJILLO</h5>
-          <hr>
-          <!-- Información adicional -->
-          <p><strong> <i class="bi bi-building icono icono-dependencia"></i>DEPENDENCIA:</strong> SUB ALCALDIA DISTRITO MUNICIPAL-6</p>
-          <p><strong><i class="bi-person-badge icono icono-cargo"></i>CARGO:</strong> RECEPCIONISTA</p>
-          <p><strong><i class="bi-hash icono icono-numero"></i>NUMERO CEL:</strong> 78956325</p>
-        </div>
-        <!-- Footer del modal con botón de cerrar -->
-        <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 25px;">Cerrar</button>
-        </div>
+            <!-- Modal -->
+            <ng-template
+                #pdfModal
+                let-modal
+            >
+                <div class="modal-header">
+                    <h5 class="modal-title">Ver Documento</h5>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        aria-label="Close"
+                        (click)="modal.dismiss('Cross click')"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    <div class="position-relative">
+                        <embed
+                            *ngIf="pdfSrc !== ''"
+                            [src]="pdfSrc | domSanitizerCreacionSolicitudes"
+                            type="application/pdf"
+                            alt="pdf"
+                            pluginspage="http://www.adobe.com/products/acrobat/readstep2.html"
+                            class="pdfview"
+                            style="height: 300px; width: 100%;"
+                        >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="modal.close('Close click')"
+                    >
+                        Cerrar
+                    </button>
+                </div>
+            </ng-template>
+
+            <!-- Modal -->
+            <div
+                class="modal fade"
+                id="exampleModals"
+                tabindex="-1"
+                aria-labelledby="exampleModalsLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <!-- Header del modal con botón cerrar alineado a la izquierda -->
+                        <div class="modal-header d-flex justify-content-start">
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <!-- Cuerpo del modal -->
+                        <div class="modal-body text-center">
+                            <!-- Imagen del perfil -->
+                            <img
+                                src="assets/usuario.png"
+                                class="rounded-circle mb-3"
+                                alt="Imagen del perfil"
+                                style="width: 100px; height: 100px;"
+                            >
+                            <!-- Nombre del usuario -->
+                            <h5 class="fw-bold text-success">
+                                {{selectedPersona?.nombres}} {{selectedPersona?.apellidos}}
+                            </h5>
+                            <hr>
+                            <!-- Información adicional -->
+                            <p>
+                                <strong>
+                                    <i class="bi bi-building icono icono-dependencia"></i>
+                                    DEPENDENCIA:
+                                </strong>
+                                SUB ALCALDIA DISTRITO MUNICIPAL-6
+                            </p>
+                            <p>
+                                <strong>
+                                    <i class="bi-person-badge icono icono-cargo"></i>
+                                    CARGO:
+                                </strong>
+                                {{selectedPersona?.cargo}}
+                            </p>
+                            <p>
+                                <strong>
+                                    <i class="bi-hash icono icono-numero"></i>
+                                    NUMERO CEL:
+                                </strong>
+                                {{selectedPersona?.celular}}
+                            </p>
+                        </div>
+                        <!-- Footer del modal con botón de cerrar -->
+                        <div class="modal-footer justify-content-center">
+                            <button
+                                type="button"
+                                class="btn btn-danger"
+                                data-bs-dismiss="modal"
+                                style="border-radius: 25px;"
+                            >
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </ng-container>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModals" tabindex="-1" aria-labelledby="exampleModalsLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <!-- Header del modal con botón cerrar alineado a la izquierda -->
+      <div class="modal-header d-flex justify-content-start">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <!-- Cuerpo del modal -->
+      <div class="modal-body text-center">
+        <!-- Imagen del perfil -->
+        <img src="assets/usuario.png" class="rounded-circle mb-3" alt="Imagen del perfil" style="width: 100px; height: 100px;">
+        <!-- Nombre del usuario -->
+        <h5 class="fw-bold text-success">
+          {{selectedPersona?.nombres}} {{selectedPersona?.apellidos}}</h5>
+        <hr>
+        <!-- Información adicional -->
+        <p><strong> <i class="bi bi-building icono icono-dependencia"></i>DEPENDENCIA:</strong> SUB ALCALDIA DISTRITO MUNICIPAL-6</p>
+        <p><strong><i class="bi-person-badge icono icono-cargo"></i>CARGO:</strong> {{selectedPersona?.cargo}}</p>
+        <p><strong><i class="bi-hash icono icono-numero"></i>NUMERO CEL:</strong> {{selectedPersona?.celular}}</p>
+      </div>
+      <!-- Footer del modal con botón de cerrar -->
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="border-radius: 25px;">Cerrar</button>
       </div>
     </div>
   </div>
-  
-
-
-
-  <!-- Modal -->
-<ng-template #pdfModal let-modal>
-  <div class="modal-header">
-    <h5 class="modal-title">Ver Documento</h5>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-  </div>
-  <div class="modal-body">
-    <div class="position-relative">
-      <embed
-        *ngIf="pdfSrc !== ''"
-        [src]="pdfSrc | domSanitizerCreacionSolicitudes"
-        type="application/pdf"
-        alt="pdf"
-        pluginspage="http://www.adobe.com/products/acrobat/readstep2.html"
-        class="pdfview"
-        style="height: 300px; width: 100%;"
-      />
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
-  </div>
-</ng-template>
+</div>
