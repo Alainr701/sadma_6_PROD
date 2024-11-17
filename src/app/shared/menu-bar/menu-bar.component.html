@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li class="sidebar-item" 
-            *ngIf="this.idPeronas == 1"
+          
             >
                 <a
                     [routerLink]="control.link"
@@ -80,6 +80,24 @@
                     </span>
                 </a>
             </li>
+            <li class="sidebar-item" 
+            *ngIf="this.idPeronas == 1"
+            >
+            <a
+            [routerLink]="reportes.link"
+            class="sidebar-link"
+        >
+            <i [class]="reportes.icon"></i>
+            <span>{{ reportes.label }}</span>
+            <span
+                *ngIf="reportes.badge"
+                class="badge"
+            >
+                {{ reportes.badge }}
+            </span>
+        </a>
+            </li>
+            
 
           <div class="sidebar-footer">
             <a
@@ -92,7 +110,7 @@
         </div>
         </ul>
     </aside>
-    <div style="width: 100%;">
+    <div style="width: 100%; ">
         <app-cabezera></app-cabezera>
         <div style="
         height: calc(100vh - 60px);

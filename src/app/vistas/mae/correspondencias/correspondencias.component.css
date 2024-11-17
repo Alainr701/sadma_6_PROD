@@ -1,3 +1,25 @@
+@keyframes beginani {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+  }
+.gradient-container {
+    display: flex;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 100%;
+  font-family: "Helvetica", sans-serif;
+  background-image: linear-gradient(140deg, #2c3e50, #27ae60, #2980b9, #e74c3c, #8e44ad);
+  background-size: 400%;
+  animation: beginani 15s infinite;
+  }
 .card {
     border: 0;
     border-radius: 0;

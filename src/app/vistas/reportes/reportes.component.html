@@ -1,20 +1,66 @@
-<div class="container">
+
+<div class="container row">
+  <div >
+    <h2>GENERA REPORTE</h2>
+    <br>
     <div class="row">
-      <div id="htmlData">
-        <h2>Lista de videojuegos en stock</h2>
+      <div class="col-md-6">
+        <form (ngSubmit)="generarReporte(fechaInicio,fechaFin)">
+          <div class="form-group">
+            <label for="fechaInicio">Fecha Inicio</label>
+            <input type="date" class="form-control" id="fechaInicio" [(ngModel)]="fechaInicio" name="fechaInicio">
+          </div>
+          <div class="form-group">
+            <label for="fechaFin">Fecha Fin</label>
+            <input type="date" class="form-control" id="fechaFin" [(ngModel)]="fechaFin" name="fechaFin">
+          </div>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary">Buscar</button>
+          <button type="button" class="btn btn-secondary ml-2" (click)="limpiar()">Limpiar</button>
+        </form>
+      </div>
+    </div>
+    <br>
+
+<div id="htmlDatas" class="container">
+    <div class="text-center my-4">
+        <h3 class="fw-bold text-uppercase text-success ">Reporte de Actividades</h3>
+    </div>
+        
+    <div class="d-flex justify-content-between">
+        <span class="fw-bold">Reporte Generado por: {{name}} 
+          </span>
+      
+        <span class="fw-bold">Fecha Inicio: {{fechaInicio | date: 'dd/MM/yyyy'}} 
+          </span>
+          <span class="fw-bold">
+            Fecha Fin: {{fechaFin | date: 'dd/MM/yyyy'}}
+          </span>
+    </div>
+
         <table class="table table-bordered mt-4">
-          <tr class="table-primary">
-            <th>Id</th>
-            <th>Name</th>
-            <th>Platform</th>
-            <th>Reference</th>
-          </tr>
-          <tr *ngFor="let game of VIDEOGAMES">
-            <th>{{game.id}}</th>
-            <td>{{game.name}}</td>
-            <td>{{game.platform}}</td>
-            <td>{{game.reference}}</td>
-          </tr>
+          <thead class="table-primary">
+            <tr>
+
+              <th scope="col">codigo_interno</th>
+              <th scope="col">estado</th>
+              <th scope="col">fec_cre</th>
+              <th scope="col">obs</th>
+              <th scope="col">cite</th>
+              <th scope="col">nombre_completo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let game of VIDEOGAMES">
+              <td>{{game.codigo_interno}}</td>
+              <td>{{game.estado}}</td>
+              <td>{{game.fec_cre | date:'dd/MM/yyyy'}}</td>
+              <td>{{game.obs}}</td>
+              <td>{{game.cite}}</td>
+              <td>{{game.nombre_completo}}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -22,5 +68,5 @@
   
   
   <div>
-    <button class="btn col col-lg-4 btn-danger btn-block ml-4" (click)="downloadPDF()">Download PDF</button>
+    <button class="btn col col-lg-4 btn-danger btn-block m-3" (click)="downloadPDF()">GENERAR</button>
   </div>

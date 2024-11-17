@@ -1,17 +1,8 @@
 
 <div class="backgroud-cards">
   <div class="d-flex ">
-    <h1 class="display-4">Mis Correspondencias</h1>
+    <h1 class="display-4 text-white">Mis Correspondencias de entrada</h1>
   </div>
-  
-
-<!-- <form action="" class="search-bar">
-	<input type="search" name="search" pattern=".*\S.*" required>
-	<button class="search-btn" type="submit">
-		<span>Search</span>
-	</button>
-</form> -->
-
 <div class="container" >
     <div class="container">
       <ng-container *ngFor="let correspondence of correspondencias">
@@ -89,35 +80,35 @@
           </div>
         </div>
         <!-- Detalles externos a la tarjeta -->
-        <div class="details-container mb-3" [ngClass]="{'d-none': !correspondence.showDetails}" style="background-color: transparent; border: none;">
+        <div class="details-container mb-3" [ngClass]="{'d-none': !correspondence.showDetails}" style="background-color: transparent; border: none; ">
           <div class="table-responsive">
             <table class="table table-hover mb-3 w-100 text-center custom-font fs-7">
               <thead>
                 <tr>
-                  <th scope="col" style="width: 33%;"><strong><i class="bi bi-file-earmark-check fs-3"></i> PROVEIDO:</strong></th>
-                  <th scope="col" style="width: 34%;"><strong><i class="bi bi-info-circle fs-3"></i> DESCRIPCIÓN:</strong></th>
-                  <th scope="col" style="width: 33%;"><strong><i class="bi bi-link-45deg fs-3"></i> REFERENCIA:</strong></th>
+                  <th class="text-white" scope="col" style="width: 33%;"><strong><i class="bi bi-file-earmark-check fs-3 text-white"></i> PROVEIDO:</strong></th>
+                  <th class="text-white" scope="col" style="width: 34%;"><strong><i class="bi bi-info-circle fs-3 text-white"></i> DESCRIPCIÓN:</strong></th>
+                  <th class="text-white" scope="col" style="width: 33%;"><strong><i class="bi bi-link-45deg fs-3 text-white"></i> REFERENCIA:</strong></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td class="text-wrap text-break">{{ correspondence.historial?.proveido }}</td>
-                  <td class="text-wrap text-break">{{ correspondence.historial?.obs }}</td>
-                  <td class="text-wrap text-break">{{ correspondence.referencia }}</td>
+                  <td class="text-wrap text-break text-white">{{ correspondence.historial?.proveido }}</td>
+                  <td class="text-wrap text-break text-white">{{ correspondence.historial?.obs }}</td>
+                  <td class="text-wrap text-break text-white">{{ correspondence.referencia }}</td>
                 </tr>
               </tbody>
               <thead>
                 <tr>
-                  <th scope="col" style="width: 33%;"><strong><i class="bi bi-file-text fs-3"></i> OBSERVACIÓN:</strong></th>
-                  <th scope="col" style="width: 34%;"><strong><i class="bi bi-buildings fs-3"></i> CITE:</strong></th>
-                  <th scope="col" style="width: 33%;"><strong><i class="bi bi-box-arrow-up-right fs-3"></i> ACCIÓN:</strong></th>
+                  <th class="text-white" scope="col" style="width: 33%;"><strong><i class="bi bi-file-text fs-3 text-white"></i> OBSERVACIÓN:</strong></th>
+                  <th class="text-white" scope="col" style="width: 34%;"><strong><i class="bi bi-buildings fs-3 text-white"></i> CITE:</strong></th>
+                  <th class="text-white" scope="col" style="width: 33%;"><strong><i class="bi bi-box-arrow-up-right fs-3 text-white"></i> ACCIÓN:</strong></th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td class="text-wrap text-break">{{ correspondence.observacion }}</td>
-                  <td class="text-wrap text-break">{{ correspondence.cite }}</td>
-                  <td class="text-wrap text-break">{{ correspondence.estado }}</td>
+                  <td class="text-wrap text-break text-white">{{ correspondence.observacion }}</td>
+                  <td class="text-wrap text-break text-white">{{ correspondence.cite }}</td>
+                  <td class="text-wrap text-break text-white">{{ correspondence.estado }}</td>
                 </tr>
               </tbody>
             </table>
@@ -151,51 +142,51 @@
             <table class="table table-hover mb-3 w-100 text-center custom-font fs-7">
               <thead>
                 <tr style="vertical-align: top;">
-                  <th scope="col" style="width: 10%; min-width: 5rem;">
-                    <i class="bi bi-person-circle fs-3 d-block"></i>
+                  <th class="" scope="col" style="width: 10%; min-width: 5rem;">
+                    <i class="bi bi-person-circle fs-3  d-block"></i>
                     <strong>Nro:</strong>
                   </th>
-                  <th scope="col" style="width: 20%; min-width: 10rem;">
-                    <i class="bi bi-person-circle fs-3 d-block"></i>
+                  <th class="" scope="col" style="width: 20%; min-width: 10rem;">
+                    <i class="bi bi-person-circle fs-3  d-block"></i>
                     <strong>Remitente:</strong>
                   </th>
 
-                  <th scope="col" style="width: 20%; min-width: 10rem;">
-                    <i class="bi bi-calendar-check fs-3 d-block"></i>
+                  <th class="" scope="col" style="width: 20%; min-width: 10rem;">
+                    <i class="bi bi-calendar-check fs-3  d-block"></i>
                     <strong>Fecha Derivación:</strong>
                   </th>
-                  <th scope="col" style="width: 20%; min-width: 10rem;">
-                    <i class="bi bi-person-circle fs-3 d-block"></i>
+                  <th class="" scope="col" style="width: 20%; min-width: 10rem;">
+                    <i class="bi bi-person-circle fs-3  d-block"></i>
                     <strong>Destinatario:</strong>
                   </th>
-                  <th scope="col" style="width: 20%; min-width: 10rem;">
-                    <i class="bi bi-calendar-check fs-3 d-block"></i>
+                  <th class="" scope="col" style="width: 20%; min-width: 10rem;">
+                    <i class="bi bi-calendar-check fs-3  d-block"></i>
                     <strong>Fecha Respuesta:</strong>
                   </th>
-                  <th scope="col" style="width: 30%; min-width: 15rem;">
-                    <i class="bi bi-file-earmark-check fs-3 d-block"></i>
+                  <th class="" scope="col" style="width: 30%; min-width: 15rem;">
+                    <i class="bi bi-file-earmark-check fs-3  d-block"></i>
                     <strong>Proveido Remitente:</strong>
                   </th>
-                  <th scope="col" style="width: 30%; min-width: 15rem;">
-                    <i class="bi bi-file-earmark-x fs-3 d-block"></i>
-                    <strong>Rechazado:</strong>
+                  <th class="" scope="col" style="width: 30%; min-width: 15rem;">
+                    <i class="bi bi-file-earmark-x fs-3  d-block"></i>
+                    <strong>Observacion:</strong>
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let item of listaHistorial">
-                  <td class="text-wrap text-break">{{ item.numerador }}</td>
+                  <td class="text-wrap text-break text-black">{{ item.numerador }}</td>
 
 
-                  <td class="text-wrap text-break">{{ item.nombre_remitente }} {{ item.apellido_remitente }} |<b> {{ item.cargo_remitente }} </b></td>
+                  <td class="text-wrap text-break text-black">{{ item.nombre_remitente }} {{ item.apellido_remitente }} |<b> {{ item.cargo_remitente }} </b></td>
 
-                  <td class="text-wrap text-break">{{ item.fecha_derivacion | date: 'dd/MM/yyyy HH:mm' }}</td>
+                  <td class="text-wrap text-break text-black">{{ item.fecha_derivacion | date: 'dd/MM/yyyy HH:mm' }}</td>
 
-                  <td class="text-wrap text-break">{{ item.nombre_destinatario  }} {{ item.apellido_destinatario }} | <b> {{ item.cargo_destinatario }} </b></td>
+                  <td class="text-wrap text-break text-black">{{ item.nombre_destinatario  }} {{ item.apellido_destinatario }} | <b> {{ item.cargo_destinatario }} </b></td>
 
-                  <td class="text-wrap text-break">{{ item.fecha_respuesta | date: 'dd/MM/yyyy HH:mm' }}</td>
-                  <td class="text-wrap text-break">{{ item.proveido }} </td>
-                  <td class="text-wrap text-break">{{ item.obs }} </td>
+                  <td class="text-wrap text-break text-black">{{ item.fecha_respuesta | date: 'dd/MM/yyyy HH:mm' }}</td>
+                  <td class="text-wrap text-break text-black">{{ item.proveido }} </td>
+                  <td class="text-wrap text-break text-black">{{ item.obs }} </td>
 
                 </tr>
               </tbody>
@@ -208,7 +199,7 @@
     </div>
   </div>
 </div>
-
+</div>
      <!-- Remitente modal--> 
   <!-- Modal -->
    

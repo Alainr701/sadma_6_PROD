@@ -66,7 +66,7 @@ export class LoginComponent {
         Swal.fire({
           icon: 'error',
           title: '',
-          text: 'No existe el usuario'
+          text: 'No existe el usuario o esta inactivo'
         });
       }
     )

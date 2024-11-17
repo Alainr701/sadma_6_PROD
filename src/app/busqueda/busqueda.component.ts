@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CorrespondenciaService } from '../servicios/correspondencia.service';
+import { Correspondences } from '../vistas/mae/correspondencias/correspondencias.component';
+import { HistorialApp } from '../vistas/mae/bandeja/entrada-c/entrada-c.component';
 
 
 export interface HojaRutaa{
@@ -71,7 +73,18 @@ hojaRuta:HojaRutaa|null = null;
     console.log(res);
   }
 
-  showHistorial(){
-    console.log();
+  clickButtons(number: number) {
+    this.codigoHojaRuta = this.codigoHojaRuta ? Number(this.codigoHojaRuta + '' + number) : number;
+  }
+
+  
+  listaHistorial: HistorialApp[] = [];
+  async  showHistorial(id_hoja_de_ruta: number) {
+    
+    let body = {
+      "id_hoja_de_ruta": id_hoja_de_ruta
+    }
+    let data = await this.correspondeceService.getHistorial(body);
+    this.listaHistorial = data.data;
   }
 }

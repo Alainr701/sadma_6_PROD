@@ -104,4 +104,7 @@ async consultarPersonas(): Promise<ResponseI> {
 async actualizarEstadoUsuario(body:any): Promise<ResponseI> {
   return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/actualizarEstadoUsuario`, body));
 }
+async obtenerReporte(body:any): Promise<ResponseI> {
+  return lastValueFrom(this.http.post<ResponseI>(`${this.httpA}/reporte`, body));
+}
 }

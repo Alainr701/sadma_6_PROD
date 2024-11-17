@@ -12,7 +12,9 @@ export class MenuBarComponent {
     { label: 'Crear Correspondencia', link: '/mae/correspondencias' ,icon: 'bi bi-file-earmark'},
     { label: 'Control de Correspondencia', link: '/mae/control' ,icon: 'bi bi-file-earmark-text' },
     { label: 'Agregar Usuarios', link: '/mae/usuarios' ,icon: 'bi bi-person' },
-    { label: 'Reportes', link: '/mae/reportes ' ,icon: 'bi bi-person' },
+    
+    { label: 'Reportess', link: '/mae/reportess' ,icon: 'bi bi-file-earmark' },
+   
     // { label: 'Home', link: '/mae/bandeja' ,icon: 'bi bi-envelope', badge: 169 },
     // { label: 'Esto a donde', link: '/mae/inicio', icon: 'bi bi-file-earmark-plus' },
     // { label: 'Control de Correspondencia', link: '/mae/bandeja-principal', icon: 'bi bi-file-earmark-text' },

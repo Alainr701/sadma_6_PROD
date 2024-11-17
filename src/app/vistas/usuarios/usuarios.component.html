@@ -1,3 +1,4 @@
+<div class="gradient-container">
 <div class="container my-4">
     <!-- Botón que abre el modal -->
     <button type="button" class="btn" style="background-color: #0e2238;color: white;"  (click)="openModal()">Agregar nuevos Técnico</button>
@@ -6,30 +7,30 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Modificar</th>
-            <th>nombre</th>
-            <th>Apellidos</th>
-            <th>N° C.I.</th>
-            <th>N° Contacto</th>
-            <th>Cargo</th>
-            <th>Estado</th>
-            <th>Usuario</th>
-            <th>Fecha de Habilitación</th>
+            <th class="text-white">Modificar</th>
+            <th class="text-white">nombre</th>
+            <th class="text-white">Apellidos</th>
+            <th class="text-white">N° C.I.</th>
+            <th class="text-white">N° Contacto</th>
+            <th class="text-white">Cargo</th>
+            <th class="text-white">Estado</th>
+            <th class="text-white">Usuario</th>
+            <th class="text-white">Fecha de Habilitación</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of listaPersonas">
-            <td>
+            <td class="text-white">
               <button (click)="modificarUsuario(user)" class="btn" style="background-color: #0e2238;color: white;" >
                 Modificar
               </button>
             </td>
-            <td>{{ user.nombres }}</td>
-            <td>{{ user.apellidos }}</td>
-            <td>{{ user.ci }}</td>
-            <td>{{ user.celular}}</td>
-            <td>{{ user.roles }}</td>
-            <td>
+            <td class="text-white">{{ user.nombres }}</td>
+            <td class="text-white">{{ user.apellidos }}</td>
+            <td class="text-white">{{ user.ci }}</td>
+            <td class="text-white">{{ user.celular}}</td>
+            <td class="text-white">{{ user.roles }}</td>
+            <td class="text-white">
               <button
                 (click)="toggleEstado(user)"
                 [ngClass]="{
@@ -41,13 +42,14 @@
                 {{ user.estado ? "Habilitado" : "Deshabilitado" }}
               </button>
             </td>
-            <td>{{ user.usuario }}</td>
-            <td>{{ user.fec_cre | date: "dd/MM/yyyy" }}</td>
+            <td class="text-white">{{ user.usuario }}</td>
+            <td class="text-white">{{ user.fec_cre | date: "dd/MM/yyyy" }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+  
   <div class="modal fade" id="modalAgregarTecnico" tabindex="-1" aria-labelledby="modalAgregarTecnicoLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -159,3 +161,4 @@
       </div>
     </div>
   </div>
+</div>
