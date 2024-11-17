@@ -1,90 +1,146 @@
-<div class="modal-overlay" *ngIf="isModalVisible" style="z-index: 9 !important;">
-    <div class="modal-container">
-      <div class="modal-header">
-        <h2>Derivacion Externa {{codigoInterno}} ORIGINAL</h2>
-        <button  (click)=cerarModalHTML() class="close-button">&times;</button>
+<div class="modal-overlay" *ngIf="isModalVisible" style="z-index: 9 !important">
+  <div class="modal-container">
+    <div class="modal-header">
+      <h2>Derivacion Externa {{ codigoInterno }} ORIGINAL</h2>
+      <button (click)="cerarModalHTML()" class="close-button">&times;</button>
+    </div>
+
+    <div class="modal-content">
+      <div class="step-indicator">
+        <div [class.active]="step === 1">
+          <span>1</span>
+          <p>ELEGIR DEPENDENCIA</p>
+        </div>
+        <div [class.active]="step === 2">
+          <span>2</span>
+          <p>DATOS PROVEIDO</p>
+        </div>
+        <div [class.active]="step === 3">
+          <span>3</span>
+          <p>ARCHIVOS</p>
+        </div>
       </div>
-  
-      <div class="modal-content">
-        <div class="step-indicator">
-          <div [class.active]="step === 1">
-            <span>1</span>
-            <p>ELEGIR DEPENDENCIA</p>
-          </div>
-          <div [class.active]="step === 2">
-            <span>2</span>
-            <p>DATOS PROVEIDO</p>
-          </div>
-          <div [class.active]="step === 3">
-            <span>3</span>
-            <p>ARCHIVOS</p>
-          </div>
-        </div>
-  
-        <div *ngIf="step === 1">
-          <!-- Select para DEPENDENCIA -->
-          <div class="form-group">
-            <label>DEPENDENCIA</label>
-            <select [(ngModel)]="formData.dependency" class="form-control" (ngModelChange)="onDependencyChange()">
-              <option *ngFor="let persona of listaPersonas" [value]="persona.id_personas">
-                {{ persona.nombre }} <!-- Aquí muestras solo el nombre de la unidad -->
-              </option>
-            </select>
-          </div>
-          
-        
-          <!-- Select para RECEPCIÓN (solo muestra la persona seleccionada) -->
-          <div class="form-group">
-            <label>RECEPCIÓN</label>
-            <select [(ngModel)]="formData.reception" class="form-control">
-              <option *ngIf="selectedPersona">
-                {{ selectedPersona.nombres }} {{ selectedPersona.apellidos }} 
-              </option>
-            </select>
-          </div>
-        </div>
-        
-  
-        <div *ngIf="step === 2">
-          <div class="form-group">
-            <label>Seleccionar Proveido</label>
-            <select [(ngModel)]="formData.provider">
-              <option>Ej: Para su Atencion</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Obs:</label>
-            <textarea [(ngModel)]="formData.observation" placeholder="Existe alguna Observacion?"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Plazo(Dias):</label>
-            <input type="number" [(ngModel)]="formData.days">
-          </div>
-        </div>
-  
-        <div *ngIf="step === 3">
-          <fieldset class="border p-3 mb-3">
-            <legend class="w-auto px-2">SUBIR ARCHIVOS</legend>
-            <p>Nota: Los archivos deben estar en formato PDF y no deben pesar más de 2MB.</p>
-            <input 
-            type="file" 
-            id="archivo"
-            (change)="subirArchivo($event)" 
+
+      <div *ngIf="step === 1">
+        <!-- Select para DEPENDENCIA -->
+        <div class="form-group">
+          <label>DEPENDENCIA</label>
+          <select
+            [(ngModel)]="formData.dependency"
+            class="form-control"
+            (ngModelChange)="onDependencyChange()"
+          >
+            <option
+              *ngFor="let persona of listaPersonas"
+              [value]="persona.id_personas"
             >
-            <!-- (change)="subirArchivo($event.target.files)" -->
-            <!-- <button class="btn btn-success" (click)="subirArchivo()">
+              {{ persona.nombre }}
+              <!-- Aquí muestras solo el nombre de la unidad -->
+            </option>
+          </select>
+        </div>
+
+        <!-- Select para RECEPCIÓN (solo muestra la persona seleccionada) -->
+        <div class="form-group">
+          <label>RECEPCIÓN</label>
+          <select [(ngModel)]="formData.reception" class="form-control">
+            <option *ngIf="selectedPersona">
+              {{ selectedPersona.nombres }} {{ selectedPersona.apellidos }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div *ngIf="step === 2">
+        <div class="form-group">
+          <label>Seleccionar Proveido</label>
+          <select [(ngModel)]="formData.provider">
+            <option>Ej: Para su Atencion</option>
+            <option value="atencion">Para su gentil atención</option>
+            <option value="cumplimiento">Para su cumplimiento</option>
+            <option value="fines_consiguientes_1">
+              Para su atención y fines consiguientes
+            </option>
+            <option value="consideracion">Para su consideración</option>
+            <option value="remision_fiscalia_1">
+              Para su atención y posterior remisión a la Fiscalía
+            </option>
+            <option value="programacion_banda">
+              Para su programación en agenda de la Banda de Música
+            </option>
+            <option value="respuesta_urgente">
+              Respuesta en el día Urgente
+            </option>
+            <option value="fines_consiguientes_2">
+              Para su consideración y fines consiguientes
+            </option>
+            <option value="conocimiento_fines">
+              Para su conocimiento y fines consiguientes
+            </option>
+            <option value="remision_fiscalia_2">
+              Para su atención y posterior remisión a la Fiscalía
+            </option>
+            <option value="programacion_banda_2">
+              Para su programación en agenda de la Banda de Música
+            </option>
+            <option value="respuesta_urgente_2">
+              Respuesta en el día Urgente
+            </option>
+            <option value="conocimiento">Para su conocimiento</option>
+            <option value="notificacion">
+              Para su atención proceda a la notificación respectiva, según
+              procedimiento administrativo.
+            </option>
+            <option value="normativa_vigente">
+              Para su atención procédase a su normativa vigente y procedimiento
+              administrativo.
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Obs:</label>
+          <textarea
+            [(ngModel)]="formData.observation"
+            placeholder="Existe alguna Observacion?"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label>Plazo(Dias):</label>
+          <input type="number" [(ngModel)]="formData.days" />
+        </div>
+      </div>
+
+      <div *ngIf="step === 3">
+        <fieldset class="border p-3 mb-3">
+          <legend class="w-auto px-2">SUBIR ARCHIVOS</legend>
+          <p>
+            Nota: Los archivos deben estar en formato PDF y no deben pesar más
+            de 2MB.
+          </p>
+          <input type="file" id="archivo" (change)="subirArchivo($event)" />
+          <!-- (change)="subirArchivo($event.target.files)" -->
+          <!-- <button class="btn btn-success" (click)="subirArchivo()">
               <i class="fas fa-upload"></i> Subir Archivo
             </button> -->
-          </fieldset>
-        </div>
-  
-        <div class="button-group">
-          <button *ngIf="showBackButton()" (click)="handleBack()" class="back-button">Atras</button>
-          <div class="spacer" *ngIf="!showBackButton()"></div>
-          <button *ngIf="step < 3" (click)="handleNext()" class="next-button">Siguiente</button>
-          <button *ngIf="step === 3" (click)="submitForm()" class="submit-button">Derivar Hoja de Ruta</button>
-        </div>
+        </fieldset>
+      </div>
+
+      <div class="button-group">
+        <button
+          *ngIf="showBackButton()"
+          (click)="handleBack()"
+          class="back-button"
+        >
+          Atras
+        </button>
+        <div class="spacer" *ngIf="!showBackButton()"></div>
+        <button *ngIf="step < 3" (click)="handleNext()" class="next-button">
+          Siguiente
+        </button>
+        <button *ngIf="step === 3" (click)="submitForm()" class="submit-button">
+          Derivar Hoja de Ruta
+        </button>
       </div>
     </div>
   </div>
-
+</div>
