@@ -14,7 +14,7 @@ export class BandejaComponent {
     let data = JSON.parse(sessionStorage.getItem('userData') || 'null');
     this.idPersonas = data.id_personas;
   }
-  async actualizarPage(){
+  async recargar(){
     window.location.reload();
   }
 

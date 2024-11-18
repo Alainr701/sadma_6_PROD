@@ -13,7 +13,7 @@ import { CorrespondenciasComponent } from './vistas/mae/correspondencias/corresp
 import { FormularioComponent } from './vistas/mae/correspondencias/formulario/formulario.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { UsuariosComponent } from './vistas/usuarios/usuarios.component';
-import { ReportesComponent } from './vistas/reportes/reportes.component';
+import { ReportesComponent } from './vistas/mae/bandeja/reportes/reportes.component';
 
 
 
@@ -29,6 +29,11 @@ const routes: Routes = [
     { 
       path: '', component: InitComponent,
     },
+    {
+       path: 'reportes', component: ReportesComponent 
+
+    },
+
     { 
       path: 'bandeja', component: BandejaComponent,
     },
@@ -51,9 +56,7 @@ const routes: Routes = [
   { 
       path: 'usuarios', component: UsuariosComponent 
     },
-    { path: 'reportes', component: ReportesComponent
-
-    },
+  
     ] 
 },
 

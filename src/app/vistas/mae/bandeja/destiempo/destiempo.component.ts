@@ -1,8 +1,16 @@
-import { Component, OnInit, ViewChild  } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import {MatPaginator} from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { Correspondences } from '../../correspondencias/correspondencias.component';
+import { CorrespondenciaService } from 'src/app/servicios/correspondencia.service';
+import { AppService, SPersonas } from 'src/app/servicios/app.service';
+import { DerivationData } from 'src/app/shared/form-derivacion/form-derivacion.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ResponseI } from 'src/app/interfaces/response';
+import { timer } from 'rxjs';
+
 
 interface Historial {
   id: number;
@@ -51,185 +59,45 @@ export class DestiempoComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @Input() params: any; 
 
+  correspondencias: Correspondences[] = [];
+  selectedPersona: SPersonas | null= null;
   
-  correspondences: Correspondence[] = [
-    {
-      id: 1,
-      codigo: 'SADM6-0096-2024',
-      plazo: '(2)\n48 horas',
-      fechaLimite: '19-08-2024 09:13:30',
-      fechaDerivacion: '19-08-2024 09:13:30',
-      detalles: {
-        cite: 'GAMEA-67570-2024',
-        accion: 'Derivada',
-        observacion: 'Para su atención y fines consiguientes.',
-        referencia: 'Para su atención y fines consiguientes.',
-        proveido: 'La carpeta no llegó en físico, favor verificar.fsdjjjjjjknnnnnnnnnnnnnnnnnnnnnnnnnnndsajjjjjjjjjjjjjj',
-        descripcion: 'La carpeta no llegó en físico, favor verificar.fsdjjjjjjknnnnnnnnnnnnnnnnnnnnnnnnnnndsajjjjjjjjjjjjjj',
-        
-        historial: [
-          {
-            id: 1,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },
-          {
-            id: 2,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },
-          {
-            id: 3,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },
-          {
-            id: 4,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },
-          {
-            id: 5,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },
-          ],
-          remitente :[
-           {id: 1 ,
-            r:'Aldo yañez',
-            dependencia:'unidad de infrestructura publica',
-            cargo: 'jefe de unnidad',
-            numero: '78975151',
-          }
-          ]
-          
-          
-      },
-      showDetails: false
-    },
-    {
-      id: 2,
-      codigo: 'SADM6-0096-2024',
-      plazo: '(2)\n48 horas',
-      fechaLimite: '19-08-2024 09:13:30',
-      fechaDerivacion: '19-08-2024 09:13:30',
-      detalles: {
-        cite: 'GAMEA-67570-2024',
-        accion: 'Derivada',
-        observacion: 'Para su atención y fines consiguientes.',
-        referencia: 'Para su atención y fines consiguientes.',
-        proveido: 'La carpeta no llegó en físico, favor verificar.fsdjjjjjjknnnnnnnnnnnnnnnnnnnnnnnnnnndsajjjjjjjjjjjjjj',
-        descripcion: 'La carpeta no llegó en físico, favor verificar.fsdjjjjjjknnnnnnnnnnnnnnnnnnnnnnnnnnndsajjjjjjjjjjjjjj',
-        
-        historial: [
-          {
-            id: 1,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },
-          {
-            id: 2,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },
-          {
-            id: 3,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },
-          {
-            id: 4,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },
-          {
-            id: 5,
-            remitente: 'SIXTO ULO CHAMBI[SECRETARIA MUNICIPAL DE dsadasdasdasd]',
-            fechaDerivacion: '18-08-2024 08:00:00',
-            destinatario: 'BETHY LIMACHI VIDAL[SECRETARIA MUNICIPAL DE GESTIÓN INSTITUCIONAL]',
-            fechaRecepcion: '18-08-2024 10:00:00',
-            proveido: 'Proveído 1',
-            observacion: 'Observación 1',
-            remision: 'Remisión 1'
-          },  
-        ],
-        remitente :[
-          {id: 1 ,
-           r:'Josmel  Trujillo',
-           dependencia:'unidad de administracion urbana',
-           cargo: 'arquitecto',
-           numero: '71115247',
-         }
-         ],
-        
-      },
-      showDetails: false
-    },
-   
-    // Puedes añadir más elementos aquí si lo necesitas
-  ];
+  listaPersonas:SPersonas[]=[];
+   formData: DerivationData = {
+    dependency: '',
+    reception: '',
+    provider: '',
+    observation: '',
+    days: 1
+  };
 
+  listaHistorial: HistorialApp[] = [];
+ 
 
-
-  
-
-  ngOnInit(): void {
-    // Inicialización si es necesaria
+  constructor( private serviceCorrespondencia: CorrespondenciaService,private appService: AppService,private modalService: NgbModal) {
   }
 
+  async ngOnInit() {
+    await this.getLista();
+}
+
+async getLista() {
+  let body= {
+    "id_personas":this.appService.userData.id_personas,
+    "estado":"DESTIEMPO"
+  }
+  let res = await this.serviceCorrespondencia.obtenerCorrespondencia(body);
+  this.correspondencias = res.data;
+}
   showDetails = false;
 
-  toggleDetails(correspondence: Correspondence): void {
+  toggleDetails(correspondence: Correspondences): void {
     correspondence.showDetails = !correspondence.showDetails;
   }
-
-  aceptar(correspondence: Correspondence): void {
+    
+  aceptar(correspondence: Correspondences): void {
     Swal.fire({
       title: '¿Desea continuar?',
       text: 'Esta acción no se puede deshacer.',
@@ -238,17 +106,39 @@ export class DestiempoComponent {
       confirmButtonText: 'Aceptar',
       cancelButtonText: 'Cancelar',
       reverseButtons: true
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire('¡Aceptado!', 'La acción ha sido confirmada.', 'success');
-        console.log('Acción aceptada para:', correspondence);
+        let body= 
+        {
+          "id_personas": this.appService.userData.id_personas,
+          "id_hoja_de_ruta":  correspondence.id_hoja_de_ruta,
+          "estado": 'ACEPTADO',
+          "id_proveido_personas": this.appService.userData.id_personas
+        };
+      let res =  await this.serviceCorrespondencia.aceptarDerivacion(body); 
+      
+      let res3: ResponseI = await this.serviceCorrespondencia.
+      aceptarDerivacionHistorial({ // esto guarda en el historial de derivaciones
+        "id_personas": this.appService.userData.id_personas,
+        "id_hoja_de_ruta": correspondence.id_hoja_de_ruta,
+        "estado": 'ACEPTADO',
+        "id_documento_save":  null,
+        "id_proveido_personas": this.appService.userData.id_personas,
+      })
+
+        await this.getLista();
+        await Swal.fire('¡Aceptado!', 'La acción ha sido confirmada.', 'success');
+        window.location.reload();
+        
+      
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire('Cancelado', 'La acción ha sido cancelada.', 'info');
       }
     });
   }
   
-  rechazar(correspondence: Correspondence): void {
+  
+  rechazar(correspondence: Correspondences): void {
     Swal.fire({
       title: 'Motivo de Rechazo',
       input: 'textarea',
@@ -262,63 +152,102 @@ export class DestiempoComponent {
       cancelButtonText: 'Cancelar',
       reverseButtons: true,
       icon: 'error'
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        const razonRechazo = result.value; 
-        Swal.fire('¡Rechazado!', 'La acción ha sido confirmada.', 'success');
-        console.log('Acción rechazada para:', correspondence);
-        console.log('Motivo de rechazo:', razonRechazo);
+        
+        const razonRechazo = result.value;
+        let body = {
+          "id_personas": correspondence.id_proveido_personas,
+          "id_hoja_de_ruta": correspondence.id_hoja_de_ruta,
+          "estado": 'REMITIDO',
+          "id_proveido_personas": this.appService.userData.id_personas,
+          "observacion": razonRechazo,
+        };
+        let res = await this.serviceCorrespondencia.rechazarDerivacion(body);
+        let res3: ResponseI = await this.serviceCorrespondencia.aceptarDerivacionHistorial({
+          "id_personas": correspondence.id_proveido_personas,
+          "id_hoja_de_ruta": correspondence.id_hoja_de_ruta,
+          "estado": 'REMITIDO',
+          "id_documento_save": null,
+          "id_proveido_personas": this.appService.userData.id_personas,
+        });
+        await this.getLista();
+        Swal.fire('¡Rechazado!', 'La opción ha sido rechazada.', 'success');
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire('Cancelado', 'La acción ha sido cancelada.', 'info');
       }
     });
   }
 
-  selectedCorrespondence: Correspondence | null = null;
-  historialDataSource!: MatTableDataSource<Historial>;
+  selectedCorrespondence: Correspondences | null = null;
+  // historialDataSource!: MatTableDataSource<Historial>;
   displayedColumns: string[] = ['id', 'remitente', 'fechaDerivacion', 'destinatario', 'fechaRecepcion', 'proveido', 'observacion', 'remision'];
   ngAfterViewInit() {
-    if (this.selectedCorrespondence && this.selectedCorrespondence.detalles.historial) {
-      this.historialDataSource = new MatTableDataSource(this.selectedCorrespondence.detalles.historial);
-      this.historialDataSource.paginator = this.paginator;
-      this.historialDataSource.sort = this.sort;
-    }
+    // if (this.selectedCorrespondence && this.selectedCorrespondence.detalles.historial) {
+    //   this.historialDataSource = new MatTableDataSource(this.selectedCorrespondence.detalles.historial);
+    //   this.historialDataSource.paginator = this.paginator;
+    //   this.historialDataSource.sort = this.sort;
+    // }
   }
-  constructor() {}
-  showHistorial(correspondence: Correspondence): void {
+
+  async  showHistorial(correspondence: Correspondences) {
     this.selectedCorrespondence = correspondence;
-    if (this.selectedCorrespondence && this.selectedCorrespondence.detalles.historial) {
-      this.historialDataSource = new MatTableDataSource(this.selectedCorrespondence.detalles.historial);
-      this.historialDataSource.paginator = this.paginator;
-      this.historialDataSource.sort = this.sort;
+    
+    let body = {
+      "id_hoja_de_ruta": correspondence.id_hoja_de_ruta
     }
+    let data = await this.serviceCorrespondencia.getHistorial(body);
+    this.listaHistorial = data.data;
     const modalElement = document.getElementById('historialModal') as HTMLElement;
     if (modalElement) {
       const modal = new (window as any).bootstrap.Modal(modalElement);
       modal.show();
     }
   }
-  sortData(sort: Sort) {
-    const data = this.selectedCorrespondence?.detalles.historial?.slice() || [];
-    if (!sort.active || sort.direction === '') {
-      this.historialDataSource.data = data;
-      return;
+  async getRemitente(correspondence: Correspondences){
+    let body = {
+      id_personas: correspondence.id_proveido_personas,
     }
+    let res = await this.serviceCorrespondencia.buscarPersona(body);
+    this.selectedPersona = res.data[0];
+  }
+  sortData(sort: Sort) {
+    // const data = this.selectedCorrespondence?.detalles.historial?.slice() || [];
+    // if (!sort.active || sort.direction === '') {
+    //   this.historialDataSource.data = data;
+    //   return;
+    // }
 
-    this.historialDataSource.data = data.sort((a, b) => {
-      const isAsc = sort.direction === 'asc';
-      switch (sort.active) {
-        case 'id': return compare(a.id, b.id, isAsc);
-        case 'remitente': return compare(a.remitente, b.remitente, isAsc);
-        case 'fechaDerivacion': return compare(a.fechaDerivacion, b.fechaDerivacion, isAsc);
-        case 'destinatario': return compare(a.destinatario, b.destinatario, isAsc);
-        case 'fechaRecepcion': return compare(a.fechaRecepcion, b.fechaRecepcion, isAsc);
-        case 'proveido': return compare(a.proveido, b.proveido, isAsc);
-        case 'observacion': return compare(a.observacion, b.observacion, isAsc);
-        case 'remision': return compare(a.remision, b.remision, isAsc);
-        default: return 0;
-      }
+    // this.historialDataSource.data = data.sort((a, b) => {
+    //   const isAsc = sort.direction === 'asc';
+    //   switch (sort.active) {
+    //     case 'id': return compare(a.id, b.id, isAsc);
+    //     case 'remitente': return compare(a.remitente, b.remitente, isAsc);
+    //     case 'fechaDerivacion': return compare(a.fechaDerivacion, b.fechaDerivacion, isAsc);
+    //     case 'destinatario': return compare(a.destinatario, b.destinatario, isAsc);
+    //     case 'fechaRecepcion': return compare(a.fechaRecepcion, b.fechaRecepcion, isAsc);
+    //     case 'proveido': return compare(a.proveido, b.proveido, isAsc);
+    //     case 'observacion': return compare(a.observacion, b.observacion, isAsc);
+    //     case 'remision': return compare(a.remision, b.remision, isAsc);
+    //     default: return 0;
+    //   }
+    // });
+  }
+  pdfSrc = ''; 
+  @ViewChild('pdfModal') pdfModal: any;
+  async openPdfModal(correspondence: any) {
+    let res: ResponseI = await this.serviceCorrespondencia.obtenerDoc({
+      "id_hoja_de_ruta": correspondence.id_hoja_de_ruta
     });
+    this.pdfSrc = res.data.doc64; 
+    this.modalService.open(this.pdfModal, { size: 'lg', backdrop: 'static' });
+  }
+
+    descargar(pdfSrc: any) {
+      const link = document.createElement('a');
+      link.href = pdfSrc;
+      link.download = 'documento.pdf';
+      link.click();
   }
   
 }
@@ -326,3 +255,16 @@ function compare(a: number | string, b: number | string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
 
+export interface HistorialApp {
+  apellido_destinatario: string;
+  apellido_remitente: string;
+  cargo_destinatario: string;
+  cargo_remitente: string;
+  fecha_derivacion: string;
+  fecha_respuesta: string;
+  nombre_destinatario: string;
+  nombre_remitente: string;
+  numerador: number;
+  proveido: string;
+  obs: string;
+}

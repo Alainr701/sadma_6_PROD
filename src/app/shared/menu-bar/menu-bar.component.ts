@@ -13,7 +13,7 @@ export class MenuBarComponent {
     { label: 'Control de Correspondencia', link: '/mae/control' ,icon: 'bi bi-file-earmark-text' },
     { label: 'Agregar Usuarios', link: '/mae/usuarios' ,icon: 'bi bi-person' },
     
-    { label: 'Reportess', link: '/mae/reportess' ,icon: 'bi bi-file-earmark' },
+    { label: 'Reportess', link: '/mae/reportes' ,icon: 'bi bi-file-earmark' },
    
     // { label: 'Home', link: '/mae/bandeja' ,icon: 'bi bi-envelope', badge: 169 },
     // { label: 'Esto a donde', link: '/mae/inicio', icon: 'bi bi-file-earmark-plus' },

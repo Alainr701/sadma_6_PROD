@@ -28,7 +28,7 @@ import { FormDerivacionComponent } from './shared/form-derivacion/form-derivacio
 import { DomSanitizerCreacionSolicitudesPipe } from './dom-sanitizer-creacion-solicitudes.pipe';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { UsuariosComponent } from './vistas/usuarios/usuarios.component';
-import { ReportesComponent } from './vistas/reportes/reportes.component';
+import { ReportesComponent } from './vistas/mae/bandeja/reportes/reportes.component';
 
 
 
